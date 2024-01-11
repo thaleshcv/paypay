@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Application security policy.
 class ApplicationPolicy
   attr_reader :user, :record
 
@@ -36,6 +37,10 @@ class ApplicationPolicy
     false
   end
 
+  def user_fk
+    :user_id
+  end
+
   class Scope
     def initialize(user, scope)
       @user = user
@@ -49,5 +54,11 @@ class ApplicationPolicy
     private
 
     attr_reader :user, :scope
+  end
+
+  private
+
+  def owned_by_current_user?
+    record.try?(user_fk) == user.id
   end
 end

@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
+# Category factory.
 FactoryBot.define do
   factory :category do
-    name { "MyString" }
-    discarded_at { "2024-01-11 19:15:49" }
+    name { Faker::Lorem.word }
   end
 end
