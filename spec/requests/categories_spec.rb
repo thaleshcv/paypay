@@ -22,16 +22,28 @@ RSpec.describe "Categories", type: :request do
   end
 
   describe "POST /create" do
-    def create_category
-      post categories_path, params: {
-        category: {
-          name: Faker::Lorem.word
-        }
-      }
+    context "with valid params" do
+      it "creates a new user's category" do
+        expect do
+          post categories_path, params: {
+            category: {
+              name: Faker::Lorem.word
+            }
+          }
+        end.to change { Category.where(user_id: current_user).count }.by(1)
+      end
     end
 
-    it "creates a new user's category" do
-      expect { create_category }.to change { Category.where(user_id: current_user).count }.by(1)
+    context "with invalid params" do
+      it "responds with error" do
+        post categories_path, params: {
+          category: {
+            name: nil
+          }
+        }
+
+        expect(response).to have_http_status(:unprocessable_entity)
+      end
     end
   end
 
@@ -79,14 +91,16 @@ RSpec.describe "Categories", type: :request do
     context "when user's category" do
       subject { FactoryBot.create(:category, user: current_user) }
 
-      it "responds with success" do
+      before do
         put(category_path(subject), params: {
           category: {
             name: "new category name"
           }
         })
+      end
 
-        expect(response).to be_successful
+      it "updates the category" do
+        expect(subject.reload.name).to eq("new category name")
       end
     end
 
@@ -127,10 +141,10 @@ RSpec.describe "Categories", type: :request do
     context "when user's category" do
       subject { FactoryBot.create(:category, user: current_user) }
 
-      it "responds with success" do
-        delete(category_path(subject))
-
-        expect(response).to be_successful
+      it "discards the category" do
+        expect do
+          delete(category_path(subject))
+        end.to change { Category.discarded.count }.by(1)
       end
     end
 
