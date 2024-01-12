@@ -7,9 +7,11 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
 
   authenticate :user do
+    get "dashboard", to: "dashboard#index"
     resources :categories, except: :show
-    root "categories#index"
+
+    root "dashboard#index"
   end
 
-  # Defines the root path route ("/")
+  get "/", to: redirect("/dashboard")
 end
