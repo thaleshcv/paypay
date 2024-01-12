@@ -8,8 +8,8 @@ Rails.application.routes.draw do
 
   authenticate :user do
     resources :categories, except: :show
+    root "categories#index"
   end
 
   # Defines the root path route ("/")
-  # root "posts#index"
 end

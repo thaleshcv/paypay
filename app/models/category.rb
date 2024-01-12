@@ -7,7 +7,7 @@ class Category < ApplicationRecord
   belongs_to :user, inverse_of: :categories, optional: true
 
   validates_presence_of :name
-  validates_uniqueness_of :name, conditions: -> { where(discarded_at: nil, user_id: [nil, Current.user.id]) }
+  validates_uniqueness_of :name, conditions: -> { where(discarded_at: nil, user_id: [nil, Current.user&.id]) }
 
   scope :discarded, -> { where.not(discarded_at: nil) }
   scope :not_discarded, -> { where(discarded_at: nil) }

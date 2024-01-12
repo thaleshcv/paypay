@@ -7,3 +7,9 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+
+User.create!(email: "user@example.org", password: "sekret")
+
+10.times do
+  Category.create!(name: Faker::Lorem.word.capitalize)
+end

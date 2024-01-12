@@ -1,3 +1,29 @@
-<% @categories.each do |category| %>
-  <p><%= category.name %></p>
-<% end %>
+<h1>Categorias</h1>
+
+<p>
+  <%= link_to 'Nova categoria', new_category_path %>
+</p>
+
+<ul>
+  <% @categories.each do |category| %>
+    <li>
+      <strong>
+        <%= category.name %>
+      </strong>
+      <p>
+        <% if category.user_id.blank? %>
+          <small>Categoria do sistema</small>
+        <% else %>
+          <small>Categoria personalizada</small>
+          <%= link_to 'Editar', edit_category_path(category) %> /
+          <%= link_to 'Excluir',
+            category,
+            data: {
+              turbo_confirm: t("exclusion.confim"),
+              turbo_method: :delete
+            } %>
+        <% end %>
+      </p>
+    </li>
+  <% end %>
+</ul>
