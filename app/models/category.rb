@@ -9,6 +9,8 @@ class Category < ApplicationRecord
   validates_presence_of :name
   validates_uniqueness_of :name, conditions: -> { where(discarded_at: nil, user_id: [nil, Current.user.id]) }
 
+  scope :not_discarded, -> { where(discarded_at: nil) }
+
   # Marks the category as discarded by writing +discarded_at+ attribute.
   def discard!
     update_attribute(:discarded_at, Time.zone.now)

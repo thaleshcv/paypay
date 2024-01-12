@@ -5,6 +5,14 @@ RSpec.describe "Categories", type: :request do
 
   before { sign_in(current_user) }
 
+  describe "GET /index" do
+    it "responds with success" do
+      get categories_path
+
+      expect(response).to be_successful
+    end
+  end
+
   describe "GET /new" do
     it "responds with success" do
       get new_category_path

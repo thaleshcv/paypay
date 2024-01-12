@@ -4,7 +4,9 @@
 class CategoriesController < ApplicationController
   before_action :set_category, only: %i[edit update destroy]
 
-  def index; end
+  def index
+    @categories = Category.not_discarded.order(user_id: :desc, name: :asc)
+  end
 
   def new; end
 
