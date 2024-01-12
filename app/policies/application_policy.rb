@@ -58,7 +58,7 @@ class ApplicationPolicy
 
   private
 
-  def owned_by_current_user?
-    record.try?(user_fk) == user.id
+  def record_owned_by_current_user?
+    record.try(user_fk) == user.id
   end
 end

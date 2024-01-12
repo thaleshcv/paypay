@@ -4,10 +4,10 @@
 class Category < ApplicationRecord
   has_secure_token
 
-  belongs_to :user, optional: true
+  belongs_to :user, inverse_of: :categories, optional: true
 
   validates_presence_of :name
-  validates_uniqueness_of :name, conditions: -> { where(user_id: [nil, user_id]) }
+  validates_uniqueness_of :name, conditions: -> { where(discarded_at: nil, user_id: [nil, Current.user.id]) }
 
   # Marks the category as discarded by writing +discarded_at+ attribute.
   def discard!
