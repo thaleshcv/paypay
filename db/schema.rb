@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_11_221549) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_13_233655) do
   create_table "categories", force: :cascade do |t|
     t.string "token", null: false
     t.string "name"
@@ -20,6 +20,21 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_11_221549) do
     t.datetime "updated_at", null: false
     t.index ["token"], name: "index_categories_on_token"
     t.index ["user_id"], name: "index_categories_on_user_id"
+  end
+
+  create_table "entries", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "category_id", null: false
+    t.integer "operation", null: false
+    t.integer "value", null: false
+    t.string "title", null: false
+    t.text "comment"
+    t.date "date", null: false
+    t.integer "balance", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_entries_on_category_id"
+    t.index ["user_id"], name: "index_entries_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -35,4 +50,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_11_221549) do
   end
 
   add_foreign_key "categories", "users"
+  add_foreign_key "entries", "categories"
+  add_foreign_key "entries", "users"
 end

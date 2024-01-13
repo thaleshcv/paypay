@@ -5,4 +5,5 @@ class User < ApplicationRecord
     :recoverable, :rememberable, :validatable
 
   has_many :categories, inverse_of: :user
+  has_many :entries, inverse_of: :user
 end
