@@ -18,7 +18,7 @@ class CategoriesController < ApplicationController
     if @category.save
       redirect_to categories_path, notice: t(".success")
     else
-      render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_entity, notice: t(".fail")
     end
   end
 
@@ -28,7 +28,7 @@ class CategoriesController < ApplicationController
     if @category.update(category_params)
       redirect_to categories_path, notice: t(".success")
     else
-      render :edit, status: :unprocessable_entity
+      render :edit, status: :unprocessable_entity, notice: t(".success")
     end
   end
 

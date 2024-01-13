@@ -1,0 +1,17 @@
+---
+pt-BR:
+  flash:
+    notice: Aviso
+    alert: Alerta
+  exclusion:
+    confim: Confirma a exclusão? Esta operação não poderá ser desfeita.
+  categories:
+    update:
+      success: Categoria atualizada com sucesso.
+      fail: Erro ao atualizar categoria.
+    create:
+      success: Categoria criada com sucesso.
+      fail: Erro ao criar categoria.
+    destroy:
+      success: Categoria excluída com sucesso.
+      fail: Erro ao excluir categoria.
