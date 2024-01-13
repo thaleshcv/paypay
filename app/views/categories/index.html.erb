@@ -1,29 +1,31 @@
-<h1>Categorias</h1>
-
-<p>
+<div class="mb-2 d-flex align-items-end justify-content-between">
+  <h1>Categorias</h1>
   <%= link_to 'Nova categoria', new_category_path %>
-</p>
+</div>
 
-<ul>
+<ul class="list-group">
   <% @categories.each do |category| %>
-    <li>
-      <strong>
-        <%= category.name %>
-      </strong>
-      <p>
-        <% if category.user_id.blank? %>
-          <small>Categoria do sistema</small>
-        <% else %>
+    <li class="list-group-item list-group-item-action">
+      <div class="mb-2 d-flex w-100 justify-content-between">
+        <h5><%= category.name %></h5>
+      </div>
+      <% if category.user_id.blank? %>
+        <small>Categoria do sistema</small>
+      <% else %>
+        <div class="d-flex align-items-end justify-content-between">
           <small>Categoria personalizada</small>
-          <%= link_to 'Editar', edit_category_path(category) %> /
-          <%= link_to 'Excluir',
-            category,
-            data: {
-              turbo_confirm: t("exclusion.confim"),
-              turbo_method: :delete
-            } %>
-        <% end %>
-      </p>
+          <small>
+            <%= link_to 'Editar', edit_category_path(category) %> /
+            <%= link_to 'Excluir',
+              category,
+              class: "text-danger",
+              data: {
+                turbo_confirm: t("exclusion.confim"),
+                turbo_method: :delete
+              } %>
+          </small>
+        </div>
+      <% end %>
     </li>
   <% end %>
 </ul>

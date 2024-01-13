@@ -5,7 +5,7 @@ class CategoriesController < ApplicationController
   before_action :set_category, only: %i[edit update destroy]
 
   def index
-    @categories = Category.not_discarded.order(user_id: :desc, name: :asc)
+    @categories = policy_scope(Category).order(user_id: :desc, name: :asc)
   end
 
   def new
@@ -41,10 +41,7 @@ class CategoriesController < ApplicationController
 
   def set_category
     @category = authorize(
-      current_user
-        .categories
-        .not_discarded
-        .find_by!(token: params[:id])
+      policy_scope(Category).find_by!(token: params[:id])
     )
   end
 
