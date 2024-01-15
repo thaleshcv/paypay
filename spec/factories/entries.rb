@@ -1,11 +1,11 @@
 FactoryBot.define do
   factory :entry do
-    category { nil }
-    operation { 1 }
-    value { 1 }
-    title { "MyString" }
-    comment { "MyText" }
-    date { "2024-01-13" }
-    balance { 1 }
+    token { SecureRandom.hex }
+    operation { %w[income outgoing].sample }
+    value { Faker::Number.decimal(l_digits: 3, r_digits: 2) }
+    title { Faker::Lorem.sentence(word_count: 3) }
+    date { Faker::Date.backward(days: 14) }
+    association :category
+    association :user
   end
 end

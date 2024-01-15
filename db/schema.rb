@@ -25,6 +25,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_13_233655) do
   create_table "entries", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "category_id", null: false
+    t.string "token", null: false
     t.integer "operation", null: false
     t.integer "value", null: false
     t.string "title", null: false
@@ -33,6 +34,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_13_233655) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["category_id"], name: "index_entries_on_category_id"
+    t.index ["token"], name: "index_entries_on_token"
     t.index ["user_id"], name: "index_entries_on_user_id"
   end
 
