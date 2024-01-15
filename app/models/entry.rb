@@ -12,6 +12,6 @@ class Entry < ApplicationRecord
   validates_presence_of :operation, :title, :date, :value
 
   def signed_value
-    income? ? value : -value
+    outgoing? ? -value : value
   end
 end

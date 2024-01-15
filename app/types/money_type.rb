@@ -21,7 +21,7 @@ class MoneyType < ActiveRecord::Type::Decimal
       when String
         raise ArgumentError, "The value is not on a valid format." unless money_or_float?(value)
 
-        BigDecimal(value.gsub(/[^\d-]/, "")) / 100
+        (BigDecimal(value.gsub(/\D/, "")) / 100)
       when Integer
         BigDecimal(value) / 100
       else

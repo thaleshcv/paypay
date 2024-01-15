@@ -5,8 +5,8 @@ RSpec.describe MoneyType do
 
   describe "#cast" do
     context "with valid input" do
-      it "casts from negative float-like String to BigDecimal" do
-        expect(subject.cast("-1234567.89")).to eq(BigDecimal("-1234567.89"))
+      it "casts from negative float-like String to positive BigDecimal" do
+        expect(subject.cast("-1234567.89")).to eq(BigDecimal("1234567.89"))
       end
 
       it "casts from float-like String to BigDecimal" do
@@ -17,8 +17,8 @@ RSpec.describe MoneyType do
         expect(subject.cast("$ 1.234.567,89")).to eq(BigDecimal("1234567.89"))
       end
 
-      it "casts from negative currency-like String to BigDecimal" do
-        expect(subject.cast("$ -1.234.567,89")).to eq(BigDecimal("-1234567.89"))
+      it "casts from negative currency-like String to positive BigDecimal" do
+        expect(subject.cast("$ -1.234.567,89")).to eq(BigDecimal("1234567.89"))
       end
 
       it "casts from Integer to BigDecimal" do

@@ -30,7 +30,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_13_233655) do
     t.string "title", null: false
     t.text "comment"
     t.date "date", null: false
-    t.integer "balance", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["category_id"], name: "index_entries_on_category_id"

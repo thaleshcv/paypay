@@ -8,7 +8,9 @@ Rails.application.routes.draw do
 
   authenticate :user do
     get "dashboard", to: "dashboard#index"
+
     resources :categories, except: :show
+    resources :entries
 
     root "dashboard#index"
   end
