@@ -8,10 +8,11 @@ class Category < ApplicationRecord
   has_many :entries, inverse_of: :category
 
   validates_presence_of :name
-  validates_uniqueness_of :name, conditions: -> { where(discarded_at: nil, user_id: [nil, Current.user&.id]) }
+  validates_uniqueness_of :name, conditions: -> { available_for_user(Current.user) }
 
   scope :discarded, -> { where.not(discarded_at: nil) }
   scope :not_discarded, -> { where(discarded_at: nil) }
+  scope :available_for_user, ->(user) { not_discarded.where(user_id: [nil, user]) }
 
   # Marks the category as discarded by writing +discarded_at+ attribute.
   def discard!
@@ -30,4 +31,7 @@ class Category < ApplicationRecord
   # Returns +true+ if the category was created by the user, or +false+
   # if is an application's category.
   def user_category? = user_id.present?
+
+  # Returns +true+ if the category was discarded (column +discarded_at+ is set).
+  def discarded? = discarded_at.present?
 end

@@ -5,7 +5,7 @@ FactoryBot.define do
     value { Faker::Number.decimal(l_digits: 3, r_digits: 2) }
     title { Faker::Lorem.sentence(word_count: 3) }
     date { Faker::Date.backward(days: 14) }
-    association :category
     association :user
+    association :category
   end
 end

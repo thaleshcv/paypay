@@ -16,7 +16,7 @@ class CategoryPolicy < ApplicationPolicy
 
   class Scope < Scope
     def resolve
-      scope.not_discarded.where(user_id: [nil, user.id])
+      scope.available_for_user(user)
     end
   end
 end

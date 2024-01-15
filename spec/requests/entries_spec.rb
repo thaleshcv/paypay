@@ -4,6 +4,7 @@ RSpec.describe "Entries", type: :request do
   let(:current_user) { FactoryBot.create(:user) }
 
   before { sign_in(current_user) }
+  before { Current.user = current_user }
 
   describe "GET /index" do
     it "responds with success" do
@@ -123,6 +124,26 @@ RSpec.describe "Entries", type: :request do
 
           expect(response).to have_http_status(:not_found)
         end
+      end
+    end
+  end
+
+  describe "DELETE /destroy" do
+    it "deletes the entry" do
+      subject = FactoryBot.create(:entry, user: current_user)
+
+      expect do
+        delete entry_path(subject)
+      end.to change { Entry.count }.by(-1)
+    end
+
+    context "with entry owned by other user" do
+      subject { FactoryBot.create(:entry) }
+
+      it "responds with page not found" do
+        delete entry_path(subject)
+
+        expect(response).to have_http_status(:not_found)
       end
     end
   end

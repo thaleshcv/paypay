@@ -3,15 +3,19 @@
 # Security policy for Entry resource.
 class EntryPolicy < ApplicationPolicy
   def show?
-    true
+    record.user_id = user.id
   end
 
   def edit?
-    true
+    record.user_id = user.id
   end
 
   def update?
     edit?
+  end
+
+  def destroy?
+    record.user_id = user.id
   end
 
   class Scope < Scope

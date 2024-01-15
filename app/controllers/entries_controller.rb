@@ -34,7 +34,10 @@ class EntriesController < ApplicationController
     end
   end
 
-  def destroy; end
+  def destroy
+    @entry.destroy
+    redirect_to entries_path, notice: t(".success")
+  end
 
   private
 
