@@ -1,7 +1,26 @@
-<div class="mb-2 d-flex align-items-end justify-content-between">
-  <h1>Lançamentos</h1>
-  <%= link_to 'Novo lançamento', new_entry_path %>
+<h1>Lançamentos</h1>
+
+<div class="my-3 pt-5">
+  <div class="d-flex align-items-center justify-content-between">
+    <%= link_to 'Novo lançamento', new_entry_path %>
+    <div class="d-flex">
+      <%= select_month(Date.today, {}, { class: "form-select" }) %>
+      <%= select_year(Date.today, {
+          end_year: Time.zone.now.year,
+          start_year: Time.zone.now.year-10
+        }, {
+          class: "form-select"
+        }) %>
+    </div>
+  </div>
 </div>
+
+<% if @entries.empty? %>
+  <%= notification type: "info" do %>
+    <i class="bi bi-exclamation-triangle"></i>&nbsp;
+    <span>Nenhum lançamento encontrado.</span>
+  <% end %>
+<% end %>
 
 <ul class="list-group">
   <% @entries.each do |entry| %>

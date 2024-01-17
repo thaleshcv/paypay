@@ -1,2 +1,32 @@
-<%= simple_form_for @entry do %>
+<%= simple_form_for @entry do |f| %>
+  <div class="row">
+    <div class="col-12">
+      <%= f.input :title %>
+    </div>
+    <div class="col-md-6">
+      <%= f.input :operation,
+      as: :radio_buttons,
+      collection: [['Recebimento', 0], ['Despesa', 1]],
+      wrapper_tag: "p" %>
+    </div>
+    <div class="col-md-6">
+      <%= f.association :category,
+        collection: Category.available_for_user(current_user),
+        value_method: :id,
+        label_method: :name,
+        prompt: "Selecione uma categoria" %>
+    </div>
+    <div class="col-md-6">
+      <%= f.input :date, as: :string, input_html: { type: 'date' } %>
+    </div>
+    <div class="col-md-6">
+      <%= f.input :value %>
+    </div>
+    <div class="col-12">
+      <%= f.input :comment, input_html: { rows: 5 } %>
+    </div>
+    <div class="colmd-12">
+      <%= f.submit class: "btn btn-primary" %>
+    </div>
+  </div>
 <% end %>

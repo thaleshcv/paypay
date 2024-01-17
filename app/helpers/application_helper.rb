@@ -1,6 +1,13 @@
 # frozen_string_literal: true
 
 module ApplicationHelper
+  def notification(msg = nil, type: nil, &block)
+    class_names = ["notification"]
+    class_names << "notification-#{type}" if type.present?
+
+    content_tag(:div, msg, class: class_names.join(" "), &block)
+  end
+
   def user_avatar(user)
     content_tag :span,
       user.email[0].upcase,

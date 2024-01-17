@@ -15,14 +15,12 @@ RSpec.describe "Entries", type: :request do
   end
 
   describe "GET /show" do
-    context "with entry owned by current user" do
-      subject { FactoryBot.create(:entry, user: current_user) }
+    subject { FactoryBot.create(:entry, user: current_user) }
 
-      it "responds with success" do
-        get entry_path(subject)
+    it "responds with success" do
+      get entry_path(subject)
 
-        expect(response).to be_successful
-      end
+      expect(response).to be_successful
     end
 
     context "with entry owned by other user" do
@@ -68,14 +66,12 @@ RSpec.describe "Entries", type: :request do
   end
 
   describe "GET /edit" do
-    context "with entry owned by current user" do
-      subject { FactoryBot.create(:entry, user: current_user) }
+    subject { FactoryBot.create(:entry, user: current_user) }
 
-      it "responds with success" do
-        get edit_entry_path(subject)
+    it "responds with success" do
+      get edit_entry_path(subject)
 
-        expect(response).to be_successful
-      end
+      expect(response).to be_successful
     end
 
     context "with entry owned by other user" do
@@ -94,21 +90,19 @@ RSpec.describe "Entries", type: :request do
       put entry_path(entry), params: { entry: params }
     end
 
-    context "with entry owned by current user" do
-      subject { FactoryBot.create(:entry, user: current_user) }
+    subject { FactoryBot.create(:entry, user: current_user) }
 
-      context "with valid params" do
-        it "updates the entry" do
-          expect do
-            put_update_entry(subject, {
-              title: "my new title",
-              value: "$ 1.234,56"
-            })
-          end.to(change { subject.reload.updated_at })
+    context "with valid params" do
+      it "updates the entry" do
+        expect do
+          put_update_entry(subject, {
+            title: "my new title",
+            value: "$ 1.234,56"
+          })
+        end.to(change { subject.reload.updated_at })
 
-          expect(subject.reload.title).to eq("my new title")
-          expect(subject.reload.value).to eq(BigDecimal("1234.56"))
-        end
+        expect(subject.reload.title).to eq("my new title")
+        expect(subject.reload.value).to eq(BigDecimal("1234.56"))
       end
     end
 

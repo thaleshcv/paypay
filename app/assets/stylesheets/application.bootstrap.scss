@@ -1,2 +1,25 @@
-@import 'bootstrap/scss/bootstrap';
-@import 'bootstrap-icons/font/bootstrap-icons';
+@import "bootstrap/scss/bootstrap";
+@import "bootstrap-icons/font/bootstrap-icons";
+
+.notification {
+  @extend .shadow-sm;
+  @extend .p-3;
+  @extend .mb-3;
+  @extend .rounded;
+  @extend .bg-light;
+
+  &.notification-success {
+    color: $success;
+    border-bottom: 2px solid $success;
+  }
+
+  &.notification-info {
+    color: $info;
+    border-bottom: 2px solid $info;
+  }
+
+  &.notification-warning {
+    color: $warning;
+    border-bottom: 2px solid $warning;
+  }
+}
