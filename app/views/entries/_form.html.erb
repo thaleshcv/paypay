@@ -1,25 +1,28 @@
 <%= simple_form_for @entry do |f| %>
   <div class="row">
-    <div class="col-12">
+    <div class="col-md-4">
+      <%= f.input :operation,
+        collection: [%w[income Recebimento], %w[outgoing Despesa]],
+        value_method: :first,
+        label_method: :last,
+        prompt: "Selecione o tipo de operação",
+        disabled: f.object.persisted? %>
+    </div>
+    <div class="col-8">
       <%= f.input :title %>
     </div>
-    <div class="col-md-6">
-      <%= f.input :operation,
-      as: :radio_buttons,
-      collection: [['Recebimento', 0], ['Despesa', 1]],
-      wrapper_tag: "p" %>
-    </div>
-    <div class="col-md-6">
+    <div class="col-md-4">
       <%= f.association :category,
         collection: Category.available_for_user(current_user),
         value_method: :id,
         label_method: :name,
-        prompt: "Selecione uma categoria" %>
+        prompt: "Selecione a categoria",
+        required: true %>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-4">
       <%= f.input :date, as: :string, input_html: { type: 'date' } %>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-4">
       <%= f.input :value %>
     </div>
     <div class="col-12">
@@ -27,6 +30,7 @@
     </div>
     <div class="colmd-12">
       <%= f.submit class: "btn btn-primary" %>
+      <%= link_to 'Cancelar', entries_path, class: "btn btn-secondary" %>
     </div>
   </div>
 <% end %>

@@ -5,6 +5,16 @@ pt-BR:
     alert: Alerta
   exclusion:
     confim: Confirma a exclusão? Esta operação não poderá ser desfeita.
+  entries:
+    create:
+      success: Lançamento criado com sucesso.
+      fail: Erro ao criar lançamento.
+    update:
+      success: Lançamento atualizado com sucesso.
+      fail: Erro ao atualizar lançamento.
+    destroy:
+      success: Lançamento excluído com sucesso.
+      fail: Erro ao excluir lançamento.
   categories:
     update:
       success: Categoria atualizada com sucesso.

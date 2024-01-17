@@ -27,13 +27,13 @@ class Entry < ApplicationRecord
   private
 
   def cannot_use_discarded_category
-    return unless category.discarded?
+    return if category_id.blank? || !category.discarded?
 
     errors.add(:category, :invalid)
   end
 
   def cannot_use_category_from_other_user
-    return if category.user_id.blank? || category.user_id == user_id
+    return if category_id.blank? || category.user_id.blank? || category.user_id == user_id
 
     errors.add(:category, :invalid)
   end

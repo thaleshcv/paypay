@@ -8,8 +8,27 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
-User.create!(email: "user@example.org", password: "sekret")
+return unless Rails.env.development?
+
+puts "---------------- RUNNING SEED ----------------"
+
+user = User.create!(email: "user@example.org", password: "sekret")
 
 10.times do
   Category.create!(name: Faker::Lorem.word.capitalize)
+end
+
+categories = Category.all
+
+((Date.today - 90.days)..Date.today).each do |dt|
+  15.times do
+    Entry.create!(
+      user: user,
+      category: categories.sample,
+      operation: %w[income outgoing].sample,
+      date: dt,
+      title: Faker::Lorem.word.capitalize,
+      value: Faker::Number.decimal(l_digits: 3, r_digits: 2)
+    )
+  end
 end
