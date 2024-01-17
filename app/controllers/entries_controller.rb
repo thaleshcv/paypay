@@ -3,6 +3,7 @@
 # Controller for entry resource.
 class EntriesController < ApplicationController
   before_action :set_entry, only: %i[show edit update destroy]
+  before_action :set_categories, only: %i[new edit]
 
   def index
     @entries = policy_scope(Entry).order(date: :asc)
@@ -20,6 +21,7 @@ class EntriesController < ApplicationController
     if @entry.save
       redirect_to @entry, notice: t(".success")
     else
+      set_categories
       render :new, status: :unprocessable_entity, alert: t(".fail")
     end
   end
@@ -30,6 +32,7 @@ class EntriesController < ApplicationController
     if @entry.update(entry_params)
       redirect_to @entry, notice: t(".success")
     else
+      set_categories
       render :edit, status: :unprocessable_entity, alert: t(".fail")
     end
   end
@@ -56,5 +59,9 @@ class EntriesController < ApplicationController
     @entry = authorize(
       policy_scope(Entry).find_by!(token: params[:id])
     )
+  end
+
+  def set_categories
+    @categories = Category.available_for_user(current_user)
   end
 end

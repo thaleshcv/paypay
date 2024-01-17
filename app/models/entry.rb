@@ -13,6 +13,8 @@ class Entry < ApplicationRecord
 
   validates_presence_of :operation, :title, :date, :value
 
+  validate :cannot_change_operation, on: :update
+
   validate :cannot_use_category_from_other_user,
     :cannot_use_discarded_category
 
@@ -25,6 +27,12 @@ class Entry < ApplicationRecord
   end
 
   private
+
+  def cannot_change_operation
+    return unless operation_changed?
+
+    errors.add(:operation, :invalid)
+  end
 
   def cannot_use_discarded_category
     return if category_id.blank? || !category.discarded?
