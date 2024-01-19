@@ -6,7 +6,14 @@ class EntriesController < ApplicationController
   before_action :set_categories, only: %i[new edit]
 
   def index
-    @entries = policy_scope(Entry).order(date: :asc)
+    @form = if params.key?(:entries)
+      Entries::StatementForm.new(statement_form_params)
+    else
+      Entries::StatementForm.new
+    end
+
+    @entries = @form.perform(policy_scope(Entry).order(date: :asc))
+    @totals = Entries::TotalsSummary.new(@entries)
   end
 
   def show; end
@@ -43,6 +50,10 @@ class EntriesController < ApplicationController
   end
 
   private
+
+  def statement_form_params
+    params.require(:entries).permit(:date)
+  end
 
   def entry_params
     params.require(:entry).permit(

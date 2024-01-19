@@ -20,13 +20,16 @@ end
 
 categories = Category.all
 
-((Date.today - 90.days)..Date.today).each do |dt|
+days = (1..25).to_a
+months = [[10, 2023], [11, 2023], [12, 2023], [1, 2024]]
+
+months.each do |(m, y)|
   15.times do
     Entry.create!(
       user: user,
       category: categories.sample,
       operation: %w[income outgoing].sample,
-      date: dt,
+      date: Date.new(y, m, days.sample),
       title: Faker::Lorem.word.capitalize,
       value: Faker::Number.decimal(l_digits: 3, r_digits: 2)
     )

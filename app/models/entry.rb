@@ -18,6 +18,10 @@ class Entry < ApplicationRecord
   validate :cannot_use_category_from_other_user,
     :cannot_use_discarded_category
 
+  scope :where_date_between, lambda { |starting, ending|
+    where(date: starting..ending)
+  }
+
   # Overrides the default +to_param+ method.
   def to_param = token
 
