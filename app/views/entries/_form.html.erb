@@ -1,4 +1,4 @@
-<%= simple_form_for @entry do |f| %>
+<%= simple_form_for @entry, data: {controller: "mask"} do |f| %>
   <div class="row">
     <div class="col-md-4">
       <%= f.input :operation,
@@ -23,7 +23,7 @@
       <%= f.input :date, as: :string, input_html: { type: 'date' } %>
     </div>
     <div class="col-md-3">
-      <%= f.input :value %>
+      <%= f.input :value, as: :string, input_html: {data: { mask_target: "currency" }} %>
     </div>
     <div class="col-md-2">
       <%= label_tag nil, "Situação", class: "form-label" %>
