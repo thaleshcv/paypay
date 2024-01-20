@@ -43,6 +43,7 @@ pt-BR:
       long: "%d de %B de %Y"
       short: "%d de %B"
       month_and_year: "%B/%Y"
+      weekday: "%A"
     month_names:
       -
       - Janeiro

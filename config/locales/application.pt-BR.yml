@@ -3,8 +3,11 @@ pt-BR:
   flash:
     notice: Aviso
     alert: Alerta
+  operation:
+    income: Recebimento
+    outgoing: Despesa
   exclusion:
-    confim: Confirma a exclusão? Esta operação não poderá ser desfeita.
+    confirm: Confirma a exclusão? Esta operação não poderá ser desfeita.
   entries:
     create:
       success: Lançamento criado com sucesso.

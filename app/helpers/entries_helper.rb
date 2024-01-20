@@ -20,22 +20,30 @@ module EntriesHelper
   def link_to_next_month_entries(current)
     raise ArgumentError, "argument should be Date or DateTime." unless current.is_a?(Date)
 
-    link_to_month_entries(current.next_month)
+    link_to_month_entries(current.next_month) do |label|
+      "#{label} &raquo;".html_safe
+    end
   end
 
   def link_to_prev_month_entries(current)
     raise ArgumentError, "argument should be Date or DateTime." unless current.is_a?(Date)
 
-    link_to_month_entries(current.prev_month)
+    link_to_month_entries(current.prev_month) do |label|
+      "&laquo; #{label}".html_safe
+    end
   end
 
-  def link_to_month_entries(date)
+  def link_to_month_entries(date, &block)
     raise ArgumentError, "argument should be Date or DateTime." unless date.is_a?(Date)
 
     link_label = I18n.l(date, format: :month_and_year)
     date_params = date_to_multi_params(date.change(day: 1))
 
-    link_to(link_label, entries_path(entry: date_params))
+    if block_given?
+      link_to(entries_path(entry: date_params)) { block.call(link_label) }
+    else
+      link_to(link_label, entries_path(entry: date_params))
+    end
   end
 
   private

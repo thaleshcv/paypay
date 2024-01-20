@@ -1,7 +1,7 @@
 <h1>Lançamentos</h1>
 <%= link_to 'Novo lançamento', new_entry_path %>
 
-<div class="mb-3 p-3 rounded bg-light">
+<div class="my-3 p-3 rounded bg-light">
   <div class="row align-items-end">
     <div class="col">
       <%= link_to_prev_month_entries(@form.date) %>
@@ -31,6 +31,6 @@
 <% end %>
 
 <% unless @entries.empty? %>
-  <%= render 'totals_summary' %>
+  <%= render 'totals_summary', totals: @totals, date: @form.date %>
   <%= render 'entries_list' %>
 <% end %>

@@ -1,1 +1,57 @@
-<%= @entry %>
+<h1>
+  Lançamento /
+  <small class="text-body-secondary">
+    <%= t(@entry.operation, scope: :operation) %>
+  </small>
+</h1>
+
+<div class="my-3">
+  <div class="d-flex">
+    <%= link_to '&laquo; Voltar para lançamentos'.html_safe, entries_path %>
+
+    <span class="ms-auto">
+      <%= link_to 'Novo lançamento', new_entry_path %> /
+      <%= link_to 'Editar lançamento', edit_entry_path(@entry) %> /
+      <%= link_to 'Excluir lançamento', @entry,
+        class: "text-danger",
+        data: {
+          turbo_method: :delete,
+          turbo_confirm: t("exclusion.confirm") } %>
+    </span>
+  </div>
+</div>
+
+<h3 class="my-3"><%= @entry.title %></h3>
+<div class="row my-3">
+  <div class="col-sm-12 col-md-6">
+    <strong>Valor</strong>
+    <p class="lead">
+      <%= number_to_currency(@entry.value) %>
+    </p>
+
+    <strong>Categoria</strong>
+    <p class="lead">
+      <%= @entry.category.name %>
+    </p>
+
+    <strong>Data</strong>
+    <p class="lead">
+      <%= l(@entry.date, format: :long) %>
+    </p>
+
+    <strong>Incluído em</strong>
+    <p class="lead">
+      <%= l(@entry.created_at, format: :long) %>
+    </p>
+
+    <strong>Última alteração em</strong>
+    <p class="lead">
+      <%= l(@entry.updated_at, format: :long) %>
+    </p>
+  </div>
+
+  <div class="col-sm-12 col-md-6">
+    <strong>Comentário</strong>
+    <p class="lead"><%= @entry.comment.present? ? @entry.comment : "Nenhum comentário adicionado." %></p>
+  </div>
+</div>
