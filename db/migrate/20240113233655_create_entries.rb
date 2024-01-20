@@ -9,6 +9,7 @@ class CreateEntries < ActiveRecord::Migration[7.1]
       t.string :title, null: false
       t.text :comment
       t.date :date, null: false
+      t.integer :status, default: 0
 
       t.timestamps
     end
