@@ -9,7 +9,7 @@ module Entries
       starting = date.change(day: 1).beginning_of_day
       ending = date.change(day: -1).end_of_day
 
-      base_scope.where_date_between(starting, ending)
+      base_scope.status_paid.where_date_between(starting, ending)
     end
   end
 end

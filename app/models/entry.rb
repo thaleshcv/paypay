@@ -5,7 +5,7 @@ class Entry < ApplicationRecord
   has_secure_token
 
   enum :operation, %i[income outgoing]
-  enum :status, %i[pending paid]
+  enum :status, %i[pending paid], prefix: true
 
   attribute :value, :money
 

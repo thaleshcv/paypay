@@ -11,7 +11,7 @@
     <div class="col-8">
       <%= f.input :title %>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-3">
       <%= f.association :category,
         collection: @categories,
         value_method: :id,
@@ -19,11 +19,21 @@
         prompt: "Selecione a categoria",
         required: true %>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-3">
       <%= f.input :date, as: :string, input_html: { type: 'date' } %>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-3">
       <%= f.input :value %>
+    </div>
+    <div class="col-md-2">
+      <%= label_tag nil, "Situação", class: "form-label" %>
+      <div class="d-flex align-items">
+        <%= f.label :status, "Pendente", class: "form-check-label me-2" %>
+        <div class="form-check form-switch">
+          <%= f.check_box :status, class: "form-check-input", role: "switch" %>
+          <%= f.label :status, "Pago", class: "form-check-label" %>
+        </div>
+      </div>
     </div>
     <div class="col-12">
       <%= f.input :comment, input_html: { rows: 5 } %>

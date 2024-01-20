@@ -6,11 +6,8 @@ class EntriesController < ApplicationController
   before_action :set_categories, only: %i[new edit]
 
   def index
-    @form = if params.key?(:entry)
-      Entries::StatementForm.new(statement_form_params)
-    else
-      Entries::StatementForm.new
-    end
+    @form = Entries::StatementForm.new
+    @form.assign_attributes(statement_form_params) if params.key?(:entry)
 
     @entries = @form.perform(policy_scope(Entry).order(date: :asc))
     @totals = Entries::TotalsSummary.new(@entries)
