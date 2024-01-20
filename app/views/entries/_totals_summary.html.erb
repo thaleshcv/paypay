@@ -1,0 +1,26 @@
+<div class="my-5 d-flex alig-items-center justify-content-end gap-3">
+  <div class="text-end">
+    <small class="text-muted">
+      Receita
+    </small>
+    <p class="fs-4 text-primary">
+      <%= number_to_currency @totals.income_total %>
+    </p>
+  </div>
+  <div class="text-end">
+    <small class="text-muted">
+      Despesa
+    </small>
+    <p class="fs-4 text-primary">
+      <%= number_to_currency @totals.outgoing_total %>
+    </p>
+  </div>
+  <div class="text-end">
+    <small class="text-muted">
+      Saldo
+    </small>
+    <p class="fs-4 text-primary">
+      <%= number_to_currency @totals.balance %>
+    </p>
+  </div>
+</div>

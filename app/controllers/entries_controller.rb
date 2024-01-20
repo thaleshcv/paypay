@@ -6,7 +6,7 @@ class EntriesController < ApplicationController
   before_action :set_categories, only: %i[new edit]
 
   def index
-    @form = if params.key?(:entries)
+    @form = if params.key?(:entry)
       Entries::StatementForm.new(statement_form_params)
     else
       Entries::StatementForm.new
@@ -52,7 +52,7 @@ class EntriesController < ApplicationController
   private
 
   def statement_form_params
-    params.require(:entries).permit(:date)
+    params.require(:entry).permit(:date)
   end
 
   def entry_params

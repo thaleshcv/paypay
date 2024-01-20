@@ -6,7 +6,6 @@ module Entries
     attribute :date, :date, default: Date.today
 
     def perform(base_scope)
-      puts "date #{date}"
       starting = date.change(day: 1).beginning_of_day
       ending = date.change(day: -1).end_of_day
 

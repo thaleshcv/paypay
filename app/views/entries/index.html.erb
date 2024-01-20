@@ -1,17 +1,25 @@
 <h1>Lançamentos</h1>
+<%= link_to 'Novo lançamento', new_entry_path %>
 
-<div class="mb-3">
-  <div class="d-flex align-items-end justify-content-between">
-    <%= link_to 'Novo lançamento', new_entry_path %>
-    <%= form_with model: @form, url: entries_path, method: :get, scope: :entries do |f| %>
-      <%= f.label :date, "Selecione o período", class: "form-label" %>
-      <div class="d-flex">
-        <%= f.date_select :date,
-        {order: [:month, :year], end_year: Date.today.year.next},
-        {class: "form-select"} %>
-        <%= f.submit "Ok", class: "btn btn-primary btn-sm" %>
-      </div>
-    <% end %>
+<div class="mb-3 p-3 rounded bg-light">
+  <div class="row align-items-end">
+    <div class="col">
+      <%= link_to_prev_month_entries(@form.date) %>
+    </div>
+    <div class="col text-center">
+      <%= form_with model: @form, url: entries_path, method: :get,
+      scope: :entry, data: {controller: "submit"} do |f| %>
+        <%= f.label :date, "Selecione o período", class: "form-label" %>
+        <div class="d-flex">
+          <%= f.date_select :date,
+          {order: [:month, :year], end_year: Date.today.year.next},
+          {class: "form-select"} %>
+        </div>
+      <% end %>
+    </div>
+    <div class="col text-end">
+      <%= link_to_next_month_entries(@form.date) %>
+    </div>
   </div>
 </div>
 
@@ -22,64 +30,7 @@
   <% end %>
 <% end %>
 
-<div class="my-5 d-flex alig-items-center justify-content-end gap-3">
-  <div class="text-end">
-    <small class="text-muted">
-      Receita
-    </small>
-    <p class="fs-4 text-primary">
-      <%= number_to_currency @totals.income_total %>
-    </p>
-  </div>
-  <div class="text-end">
-    <small class="text-muted">
-      Despesa
-    </small>
-    <p class="fs-4 text-primary">
-      <%= number_to_currency @totals.outgoing_total %>
-    </p>
-  </div>
-  <div class="text-end">
-    <small class="text-muted">
-      Saldo
-    </small>
-    <p class="fs-4 text-primary">
-      <%= number_to_currency @totals.balance %>
-    </p>
-  </div>
-</div>
-
-<% group_entries_by_date(@entries).each do |date, entries| %>
-  <div class="text-center">
-    <strong>
-      <%= l(date, format: :short) %>
-    </strong>
-    &bull;
-    <strong>
-      Saldo:
-      <%= number_to_currency(entries.collect(&:signed_value).sum) %>
-    </strong>
-  </div>
-  <ul class="list-group mb-4">
-    <% entries.each do |entry| %>
-      <li class="list-group-item list-group-item-action py-3">
-        <div class="w-100 d-flex justify-content-between">
-          <h5><%= entry.title %></h5>
-          <h4><%= colorized_entry_value(entry.value, operation: entry.operation) %></h4>
-        </div>
-        <div class="d-flex align-items-end justify-content-end">
-          <small>
-            <%= link_to 'Editar', edit_entry_path(entry) %> /
-            <%= link_to 'Excluir',
-            entry,
-            class: "text-danger",
-            data: {
-              turbo_confirm: t("exclusion.confim"),
-              turbo_method: :delete
-            } %>
-          </small>
-        </div>
-      </li>
-    <% end %>
-  </ul>
+<% unless @entries.empty? %>
+  <%= render 'totals_summary' %>
+  <%= render 'entries_list' %>
 <% end %>
