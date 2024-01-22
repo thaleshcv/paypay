@@ -1,11 +1,22 @@
 import { Controller } from "@hotwired/stimulus";
-
-function setupCurrencyMask(element) {}
+import currencyMask from "./masks/currencyMask";
 
 // Connects to data-controller="mask"
 export default class extends Controller {
   static targets = ["currency"];
+
+  setupCurrencyMask(el) {
+    el.value = currencyMask(el.value);
+    el.addEventListener("input", function (evt) {
+      el.value = currencyMask(evt.target.value);
+    });
+  }
+
+  initialize() {
+    this.setupCurrencyMask = this.setupCurrencyMask.bind(this);
+  }
+
   connect() {
-    this.currencyTargets.forEach(setupCurrencyMask);
+    this.currencyTargets.forEach(this.setupCurrencyMask);
   }
 }
