@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_22_191304) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_22_191855) do
   create_table "billings", force: :cascade do |t|
     t.string "description", null: false
     t.integer "due_date", null: false
@@ -44,6 +44,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_22_191304) do
     t.integer "status", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "billing_id"
+    t.index ["billing_id"], name: "index_entries_on_billing_id"
     t.index ["category_id"], name: "index_entries_on_category_id"
     t.index ["token"], name: "index_entries_on_token"
     t.index ["user_id"], name: "index_entries_on_user_id"
@@ -63,6 +65,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_22_191304) do
 
   add_foreign_key "billings", "entries", column: "last_entry_id"
   add_foreign_key "categories", "users"
+  add_foreign_key "entries", "billings"
   add_foreign_key "entries", "categories"
   add_foreign_key "entries", "users"
 end

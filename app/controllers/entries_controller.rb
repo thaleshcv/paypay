@@ -54,6 +54,7 @@ class EntriesController < ApplicationController
 
   def entry_params
     params.require(:entry).permit(
+      :status,
       :operation,
       :category_id,
       :date,

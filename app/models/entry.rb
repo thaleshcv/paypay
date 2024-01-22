@@ -11,11 +11,12 @@ class Entry < ApplicationRecord
 
   belongs_to :category, inverse_of: :entries
   belongs_to :user, inverse_of: :entries
+  belongs_to :billing, inverse_of: :entries, optional: true
+
+  accepts_nested_attributes_for :billing
 
   validates_presence_of :operation, :title, :date, :value
-
   validate :cannot_change_operation, on: :update
-
   validate :cannot_use_category_from_other_user,
     :cannot_use_discarded_category
 
