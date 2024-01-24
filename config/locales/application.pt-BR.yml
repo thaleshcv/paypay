@@ -1,5 +1,6 @@
 ---
 pt-BR:
+  undefined: Indefinido
   flash:
     notice: Aviso
     alert: Alerta

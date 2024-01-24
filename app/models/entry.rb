@@ -11,7 +11,7 @@ class Entry < ApplicationRecord
 
   belongs_to :category, inverse_of: :entries
   belongs_to :user, inverse_of: :entries
-  belongs_to :billing, inverse_of: :entries, optional: true
+  belongs_to :billing, inverse_of: :entries, optional: true, validate: true
 
   accepts_nested_attributes_for :billing
 
@@ -30,6 +30,28 @@ class Entry < ApplicationRecord
   # Returns a negative value for outgoings.
   def signed_value
     outgoing? ? -value : value
+  end
+
+  class << self
+    def create_with_billing(params)
+      billing_attributes = params.delete(:billing_attributes)
+      entry = Entry.new(user: Current.user, **params)
+
+      if billing_attributes.present?
+        ActiveRecord::Base.transaction do
+          entry.save!
+          entry.create_billing!(
+            user_id: entry.user_id,
+            last_entry_id: entry.id,
+            **billing_attributes
+          )
+        end
+      else
+        entry.save
+      end
+
+      entry
+    end
   end
 
   private

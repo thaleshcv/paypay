@@ -17,23 +17,27 @@ class EntriesController < ApplicationController
 
   def new
     @entry = Entry.new
+    @entry.build_billing
   end
 
   def create
-    @entry = current_user.entries.build(entry_params)
+    @entry = Entry.create_with_billing(create_entry_params)
 
-    if @entry.save
+    if @entry.persisted?
       redirect_to @entry, notice: t(".success")
     else
       set_categories
       render :new, status: :unprocessable_entity, alert: t(".fail")
     end
+  rescue ActiveRecord::RecordInvalid => e
+    set_categories
+    render :new, status: :unprocessable_entity, alert: e.message
   end
 
   def edit; end
 
   def update
-    if @entry.update(entry_params)
+    if @entry.update(update_entry_params)
       redirect_to @entry, notice: t(".success")
     else
       set_categories
@@ -52,7 +56,20 @@ class EntriesController < ApplicationController
     params.require(:entry).permit(:date)
   end
 
-  def entry_params
+  def create_entry_params
+    params.require(:entry).permit(
+      :status,
+      :operation,
+      :category_id,
+      :date,
+      :title,
+      :value,
+      :comment,
+      billing_attributes: %i[description due_date cycles]
+    )
+  end
+
+  def update_entry_params
     params.require(:entry).permit(
       :status,
       :operation,

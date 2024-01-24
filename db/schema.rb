@@ -12,6 +12,7 @@
 
 ActiveRecord::Schema[7.1].define(version: 2024_01_22_191855) do
   create_table "billings", force: :cascade do |t|
+    t.integer "user_id", null: false
     t.string "description", null: false
     t.integer "due_date", null: false
     t.integer "cycles", null: false
@@ -19,6 +20,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_22_191855) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["last_entry_id"], name: "index_billings_on_last_entry_id"
+    t.index ["user_id"], name: "index_billings_on_user_id"
   end
 
   create_table "categories", force: :cascade do |t|
@@ -64,6 +66,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_22_191855) do
   end
 
   add_foreign_key "billings", "entries", column: "last_entry_id"
+  add_foreign_key "billings", "users"
   add_foreign_key "categories", "users"
   add_foreign_key "entries", "billings"
   add_foreign_key "entries", "categories"

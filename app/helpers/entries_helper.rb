@@ -1,10 +1,15 @@
 # frozen_string_literal: true
 
+# Helper module for Entries.
 module EntriesHelper
   OPERATION_COLORS = {
     "income" => "success",
     "outgoing" => "danger"
   }.freeze
+
+  def entry_billing_cycles_options
+    (1..12).collect { |n| [n == 1 ? t("undefined") : n, n] }
+  end
 
   def colorized_entry_value(value, operation:)
     color_class = OPERATION_COLORS[operation]
