@@ -17,13 +17,13 @@ class EntriesController < ApplicationController
 
   def new
     @entry = Entry.new
-    @entry.build_billing
   end
 
   def create
-    @entry = Entry.create_with_billing(create_entry_params)
+    @entry = Entry.create(create_entry_params)
+    @billing = @entry.billing
 
-    if @entry.persisted?
+    if @entry.valid?
       redirect_to @entry, notice: t(".success")
     else
       set_categories

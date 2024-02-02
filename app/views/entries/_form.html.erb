@@ -1,6 +1,6 @@
 <%= simple_form_for @entry, data: {controller: "mask"} do |f| %>
   <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-7">
       <div class="row">
         <div class="col-md-12">
           <%= f.input :title %>
@@ -40,26 +40,21 @@
         <div class="col-12">
           <%= f.input :comment, input_html: { rows: 5 } %>
         </div>
-        <div class="colmd-12">
-          <%= f.submit class: "btn btn-primary" %>
-          <%= link_to 'Cancelar', entries_path, class: "btn btn-secondary" %>
-        </div>
       </div>
     </div>
-    <div class="col-md-4">
-      <fieldset>
-        <legend>Criar cobrança</legend>
-        <%= f.simple_fields_for :billing do |b| %>
-          <%= b.input :description %>
-          <%= b.input :due_date,
-          collection: (1..25),
-          prompt: "Selecione o dia do lançamento" %>
-          <%= b.input :cycles,
-          collection: entry_billing_cycles_options,
-          label_method: :first,
-          value_method: :last,
-          prompt: "Selecione quantidade de ciclos" %>
+    <div class="col-md-5">
+      <%= turbo_frame_tag "entries_billing",
+        class: "d-flex flex-column justify-content-center align-items-stretch px-2 py-3 bg-light h-100 rounded" do %>
+        <% if @billing.nil? %>
+          <%= render 'entries/billings/question' %>
+        <% else %>
+          <%= render 'entries/billings/fields' %>
         <% end %>
-      </fieldset>
+      <% end %>
     </div>
-  <% end %>
+    <div class="col-md-12">
+      <%= f.submit class: "btn btn-primary" %>
+      <%= link_to 'Cancelar', entries_path, class: "btn btn-secondary" %>
+    </div>
+  </div>
+<% end %>

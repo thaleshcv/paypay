@@ -9,6 +9,10 @@ Rails.application.routes.draw do
   authenticate :user do
     get "dashboard", to: "dashboard#index"
 
+    namespace :entries do
+      resource :billing, only: %i[show new]
+    end
+
     resources :categories, except: :show
     resources :entries
 

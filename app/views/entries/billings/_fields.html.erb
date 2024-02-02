@@ -1,0 +1,19 @@
+<fieldset>
+  <legend class="d-flex align-items-center justify-content-between">
+    <span>Criar recorrência</span>
+    <%= link_to "", entries_billing_path, class: "btn-close", aria: {label: "Close"} %>
+  </legend>
+  <%= fields model: Entry.new do |fields| %>
+    <%= fields.simple_fields_for :billing, @billing do |b| %>
+      <%= b.input :description %>
+      <%= b.input :due_date,
+              collection: (1..25),
+              prompt: "Selecione o dia do lançamento" %>
+      <%= b.input :cycles,
+              collection: entry_billing_cycles_options,
+              label_method: :first,
+              value_method: :last,
+              prompt: "Selecione quantidade de ciclos" %>
+    <% end %>
+  <% end %>
+</fieldset>

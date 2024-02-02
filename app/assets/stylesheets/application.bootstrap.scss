@@ -9,6 +9,11 @@
   @extend .rounded;
   @extend .bg-light;
 
+  &.notification-primary {
+    color: $primary;
+    border-bottom: 2px solid $primary;
+  }
+
   &.notification-success {
     color: $success;
     border-bottom: 2px solid $success;

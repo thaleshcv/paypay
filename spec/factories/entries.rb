@@ -5,7 +5,7 @@ FactoryBot.define do
     value { Faker::Number.decimal(l_digits: 3, r_digits: 2) }
     title { Faker::Lorem.sentence(word_count: 3) }
     date { Faker::Date.backward(days: 14) }
-    status { 1 }
+    status { "paid" }
     association :user
     association :category
   end

@@ -1,0 +1,2 @@
+module Entries::BillingsHelper
+end
