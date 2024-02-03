@@ -24,8 +24,15 @@ class Entry < ApplicationRecord
     where(date: starting..ending)
   }
 
+  scope :where_date_before, ->(date) { where("date <= ?", date) }
+  scope :where_date_before_today, -> { where_date_before(Date.today) }
+
   # Overrides the default +to_param+ method.
   def to_param = token
+
+  def overdue?
+    status_pending? && date < Date.today
+  end
 
   private
 

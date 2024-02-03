@@ -11,6 +11,8 @@ class EntriesController < ApplicationController
 
     @entries = @form.perform(policy_scope(Entry).order(date: :asc))
     @totals = Entries::TotalsSummary.new(@entries)
+
+    @pendings_count = policy_scope(Entry.status_pending).count
   end
 
   def show; end
@@ -48,6 +50,14 @@ class EntriesController < ApplicationController
   def destroy
     @entry.destroy
     redirect_to entries_path, notice: t(".success")
+  end
+
+  def pendings
+    @entries =
+      policy_scope(Entry)
+        .status_pending
+        .where_date_before_today
+        .order(date: :asc)
   end
 
   private

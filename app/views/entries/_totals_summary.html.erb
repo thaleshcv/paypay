@@ -1,5 +1,5 @@
-<div class="my-5 row text-center">
-  <div class="col-xs-6 col-md-3">
+<div class="my-5 row justify-content-center text-center">
+  <div class="col-xs-6 col-auto">
     <small class="text-muted">
       Período
     </small>
@@ -8,31 +8,12 @@
     </p>
   </div>
 
-  <div class="col-xs-6 col-md-3">
+  <div class="col-xs-6 col-auto">
     <small class="text-muted">
-      Receita
-    </small>
-    <p class="fs-4 text-primary">
-      <%= number_to_currency totals.income_total %>
-    </p>
-  </div>
-
-  <div class="col-xs-6 col-md-3">
-    <small class="text-muted">
-      Despesa
-    </small>
-    <p class="fs-4 text-primary">
-      <%= number_to_currency totals.outgoing_total %>
-    </p>
-  </div>
-
-  <div class="col-xs-6 col-md-3">
-    <small class="text-muted">
-      Saldo
+      Total
     </small>
     <p class="fs-4 text-primary">
       <%= number_to_currency totals.balance %>
     </p>
   </div>
-
 </div>

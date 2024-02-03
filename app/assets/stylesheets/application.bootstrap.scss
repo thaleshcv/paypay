@@ -28,4 +28,9 @@
     color: $warning;
     border-bottom: 2px solid $warning;
   }
+
+  &.notification-danger {
+    color: $danger;
+    border-bottom: 2px solid $danger;
+  }
 }
