@@ -28,9 +28,8 @@ months.each do |(m, y)|
     Entry.create!(
       user: user,
       category: categories.sample,
-      operation: %w[income outgoing].sample,
       date: Date.new(y, m, days.sample),
-      title: Faker::Lorem.word.capitalize,
+      description: Faker::Lorem.word.capitalize,
       value: Faker::Number.decimal(l_digits: 3, r_digits: 2)
     )
   end

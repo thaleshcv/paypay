@@ -96,12 +96,12 @@ RSpec.describe "Entries", type: :request do
       it "updates the entry" do
         expect do
           put_update_entry(subject, {
-            title: "my new title",
+            description: "my new title",
             value: "$ 1.234,56"
           })
         end.to(change { subject.reload.updated_at })
 
-        expect(subject.reload.title).to eq("my new title")
+        expect(subject.reload.description).to eq("my new title")
         expect(subject.reload.value).to eq(BigDecimal("1234.56"))
       end
     end
@@ -112,7 +112,7 @@ RSpec.describe "Entries", type: :request do
       context "with valid params" do
         it "responds with page not found" do
           put_update_entry(subject, {
-            title: "my new title",
+            description: "my new title",
             value: "$ 1.234,56"
           })
 

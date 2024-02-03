@@ -59,10 +59,9 @@ class EntriesController < ApplicationController
   def create_entry_params
     params.require(:entry).permit(
       :status,
-      :operation,
       :category_id,
       :date,
-      :title,
+      :description,
       :value,
       :comment,
       billing_attributes: %i[description due_date cycles]
@@ -72,10 +71,9 @@ class EntriesController < ApplicationController
   def update_entry_params
     params.require(:entry).permit(
       :status,
-      :operation,
       :category_id,
       :date,
-      :title,
+      :description,
       :value,
       :comment
     )

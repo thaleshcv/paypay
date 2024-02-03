@@ -34,11 +34,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_22_191855) do
 
   create_table "entries", force: :cascade do |t|
     t.integer "user_id", null: false
-    t.integer "category_id", null: false
+    t.integer "category_id"
     t.string "token", null: false
-    t.integer "operation", null: false
     t.integer "value", null: false
-    t.string "title", null: false
+    t.string "description", null: false
     t.text "comment"
     t.date "date", null: false
     t.integer "status", default: 0

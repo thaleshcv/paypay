@@ -3,15 +3,7 @@
     <div class="col-md-7">
       <div class="row">
         <div class="col-md-12">
-          <%= f.input :title %>
-        </div>
-        <div class="col-md-6">
-          <%= f.input :operation,
-          collection: [%w[income Recebimento], %w[outgoing Despesa]],
-          value_method: :first,
-          label_method: :last,
-          prompt: "Selecione o tipo de operação",
-          disabled: f.object.persisted? %>
+          <%= f.input :description %>
         </div>
         <div class="col-md-6">
           <%= f.association :category,
@@ -27,7 +19,7 @@
         <div class="col-md-6">
           <%= f.input :value, as: :string, input_html: {data: { mask_target: "currency" }} %>
         </div>
-        <div class="col-md-12">
+        <div class="col-md-6">
           <%= label_tag nil, "Situação", class: "form-label" %>
           <div class="d-flex align-items mb-3">
             <%= f.label :status, "Pendente", class: "form-check-label me-2" %>
@@ -44,7 +36,7 @@
     </div>
     <div class="col-md-5">
       <%= turbo_frame_tag "entries_billing",
-        class: "d-flex flex-column justify-content-center align-items-stretch px-2 py-3 bg-light h-100 rounded" do %>
+        class: "d-flex flex-column justify-content-center align-items-stretch p-3 bg-light h-100 rounded" do %>
         <% if @billing.nil? %>
           <%= render 'entries/billings/question' %>
         <% else %>

@@ -1,5 +1,21 @@
 ---
 pt-BR:
+  activerecord:
+    models:
+      entry: Lançamento
+      billing: Recorrência
+    attributes:
+      entry:
+        description: Descrição
+        category: Categoria
+        date: Data
+        value: Valor
+        status: Situação
+        comment: Comentário
+      billing:
+        description: Descrição
+        due_date: Dia de vencimento
+        cycles: Ciclos
   undefined: Indefinido
   flash:
     notice: Aviso
