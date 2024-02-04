@@ -15,7 +15,7 @@ Rails.application.routes.draw do
 
     resources :categories, except: :show
     resources :entries do
-      get "pendings", on: :collection
+      get "pending", on: :collection
     end
 
     root "dashboard#index"

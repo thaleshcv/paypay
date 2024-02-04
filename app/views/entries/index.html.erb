@@ -5,11 +5,13 @@
   </div>
   <div class="col-md-6">
     <% unless @pendings_count.zero? %>
-      <%= notification type: "danger" do %>
-        <i class="bi bi-exclamation-triangle"></i>&nbsp;
-        <span>
-          Você tem <%= pluralize(@pendings_count, 'lançamento atrasado', 'lançamentos atrasados') %>.
-        </span>
+      <%= link_to pending_entries_path, style: "text-decoration:none;" do %>
+        <%= notification type: "danger" do %>
+          <i class="bi bi-exclamation-triangle"></i>&nbsp;
+          <span>
+            Você tem <%= pluralize(@pendings_count, 'lançamento atrasado', 'lançamentos atrasados') %>.
+          </span>
+        <% end %>
       <% end %>
     <% end %>
   </div>

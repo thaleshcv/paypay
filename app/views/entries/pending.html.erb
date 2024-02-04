@@ -1,0 +1,56 @@
+<h1>Lançamentos pendentes</h1>
+<%= link_to entries_path do %>
+  &laquo; Voltar para lançamentos
+<% end %>
+
+<div class="mt-3">
+  <% if @entries.empty? %>
+    <%= notification type: "primary" do %>
+      <i class="bi bi-exclamation-triangle"></i>&nbsp;
+      <span>Nenhum lançamento pendente encontrado.</span>
+    <% end %>
+  <% end %>
+
+  <% unless @entries.empty? %>
+    <div class="vstack gap-0">
+      <% @entries.each do |item| %>
+        <div class="p-2 border border-0 border-bottom bg-light">
+          <div class="row">
+            <div class="col-auto px-5 text-center">
+              <p class="fs-2">
+                <%= item.date.day %>
+              </p>
+              <span class="text-muted text-uppercase">
+                <%= l(item.date, format: "%b %Y") %>
+              </span>
+            </div>
+            <div class="col">
+              <p class="fs-2">
+                <%= item.description %>
+              </p>
+              <span class="text-muted text-uppercase">
+                <%= t(item.status, scope: "status") %>
+              </span>
+            </div>
+            <div class="col-auto text-end">
+              <p class="fs-2">
+                <%= number_to_currency(item.value) %>
+              </p>
+              <small>
+                <%= link_to 'Detalhar', item %> /
+                <%= link_to 'Editar', edit_entry_path(item) %> /
+                <%= link_to 'Excluir',
+                item,
+                class: "text-danger",
+                data: {
+                  turbo_confirm: t("exclusion.confim"),
+                  turbo_method: :delete
+                } %>
+              </small>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>

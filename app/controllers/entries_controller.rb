@@ -52,7 +52,7 @@ class EntriesController < ApplicationController
     redirect_to entries_path, notice: t(".success")
   end
 
-  def pendings
+  def pending
     @entries =
       policy_scope(Entry)
         .status_pending

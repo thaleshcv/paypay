@@ -1,5 +1,8 @@
 ---
 pt-BR:
+  status:
+    pending: Pendente
+    paid: Pago
   activerecord:
     models:
       entry: Lançamento
@@ -20,9 +23,6 @@ pt-BR:
   flash:
     notice: Aviso
     alert: Alerta
-  operation:
-    income: Recebimento
-    outgoing: Despesa
   exclusion:
     confirm: Confirma a exclusão? Esta operação não poderá ser desfeita.
   entries:
