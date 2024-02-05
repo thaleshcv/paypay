@@ -2,8 +2,6 @@
 
 # Entry model.
 class Entry < ApplicationRecord
-  include FillCurrentUserId
-
   has_secure_token
 
   enum :status, %i[pending paid], prefix: true

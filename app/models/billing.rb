@@ -2,8 +2,6 @@
 
 # Billing model.
 class Billing < ApplicationRecord
-  include FillCurrentUserId
-
   belongs_to :user, inverse_of: :billings
   has_many :entries, inverse_of: :billing
 
