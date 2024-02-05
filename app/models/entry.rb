@@ -30,8 +30,22 @@ class Entry < ApplicationRecord
   # Overrides the default +to_param+ method.
   def to_param = token
 
+  # Returns if the entry has the status of 'pending' and the date is past.
   def overdue?
     status_pending? && date < Date.today
+  end
+
+  # Inverts the status of the entry. Pending status turns to paid and vice-versa.
+  # Optionally, a hash of attributes can be passed to update alongside the status.
+  # If you pass a "status" key in that hash, it will be ignored in favour of the inverse
+  # value for the current status.
+  def toggle_status(extras = nil)
+    extras ||= {}
+
+    new_status = self.class.statuses.keys.tap { |h| h.delete(status) }.first
+    fields = extras.reverse_merge({ status: new_status })
+
+    update(fields)
   end
 
   private

@@ -1,25 +1,38 @@
-<li class="list-group-item list-group-item-action py-3">
-  <div class="w-100 d-flex justify-content-between">
-    <h5><%= entry.description %></h5>
-    <h4><%= number_to_currency(entry.value) %></h4>
+<div class="row">
+  <div class="col-auto px-5 text-center">
+    <p class="fs-2">
+      <%= item.date.day %>
+    </p>
+    <span class="text-muted text-uppercase">
+      <%= l(item.date, format: "%b %Y") %>
+    </span>
   </div>
-  <div class="d-flex align-items-end justify-content-between">
-    <% if entry.overdue? %>
-      <strong class="text-uppercase text-danger">
-        <i class="bi bi-exclamation-triangle"></i>&nbsp;
-        Conta em atraso
-      </strong>
-    <% end %>
-    <small>
-      <%= link_to 'Detalhar', entry %> /
-      <%= link_to 'Editar', edit_entry_path(entry) %> /
-      <%= link_to 'Excluir',
-        entry,
-        class: "text-danger",
-        data: {
-          turbo_confirm: t("exclusion.confim"),
-          turbo_method: :delete
-        } %>
+  <div class="col">
+    <p class="fs-2">
+      <%= item.description %>
+    </p>
+    <small class="text-muted text-uppercase">
+      <%= t(item.status, scope: "status") %>
+      &bull;
+      <%= link_to edit_entry_status_path(item) do %>
+        <%= item.status_pending? ? "Confirmar pagamento" : "Retornar para pendente" %>
+      <% end %>
     </small>
   </div>
-</li>
+  <div class="col-auto text-end">
+    <p class="fs-2">
+      <%= number_to_currency(item.value) %>
+    </p>
+    <small>
+      <%= link_to 'Detalhar', item %> /
+      <%= link_to 'Editar', edit_entry_path(item) %> /
+      <%= link_to 'Excluir',
+          item,
+          class: "text-danger",
+          data: {
+            turbo_confirm: t("exclusion.confim"),
+            turbo_method: :delete
+          } %>
+    </small>
+  </div>
+</div>

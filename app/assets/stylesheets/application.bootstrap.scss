@@ -11,26 +11,26 @@
 
   &.notification-primary {
     color: $primary;
-    border-bottom: 2px solid $primary;
+    border-left: 3px solid $primary;
   }
 
   &.notification-success {
     color: $success;
-    border-bottom: 2px solid $success;
+    border-left: 3px solid $success;
   }
 
   &.notification-info {
     color: $info;
-    border-bottom: 2px solid $info;
+    border-left: 3px solid $info;
   }
 
   &.notification-warning {
     color: $warning;
-    border-bottom: 2px solid $warning;
+    border-left: 3px solid $warning;
   }
 
   &.notification-danger {
     color: $danger;
-    border-bottom: 2px solid $danger;
+    border-left: 3px solid $danger;
   }
 }

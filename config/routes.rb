@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     resources :categories, except: :show
     resources :entries do
       get "pending", on: :collection
+      resource :status, only: %i[edit update]
     end
 
     root "dashboard#index"

@@ -1,20 +1,24 @@
-<div class="row align-items-end">
-  <div class="col-md-6">
-    <h1>Lançamentos</h1>
-    <%= link_to 'Novo lançamento', new_entry_path %>
-  </div>
-  <div class="col-md-6">
-    <% unless @pendings_count.zero? %>
-      <%= link_to pending_entries_path, style: "text-decoration:none;" do %>
-        <%= notification type: "danger" do %>
+<h1>Lançamentos</h1>
+<%= link_to 'Novo lançamento', new_entry_path %>
+
+<div class="my-5">
+  <% unless @pendings_count.zero? %>
+    <%= notification type: "danger" do %>
+      <div class="row">
+        <div class="col-md">
           <i class="bi bi-exclamation-triangle"></i>&nbsp;
           <span>
             Você tem <%= pluralize(@pendings_count, 'lançamento atrasado', 'lançamentos atrasados') %>.
           </span>
-        <% end %>
-      <% end %>
+        </div>
+        <div class="col-md-auto">
+          <%= link_to pending_entries_path do %>
+            Ver todos&nbsp;&raquo;
+          <% end %>
+        </div>
+      </div>
     <% end %>
-  </div>
+  <% end %>
 </div>
 
 <div class="my-3 p-3 rounded bg-light">
@@ -48,5 +52,5 @@
 
 <% unless @entries.empty? %>
   <%= render 'totals_summary', totals: @totals, date: @form.date %>
-  <%= render 'entries_list' %>
+  <%= render 'entries/entries_list', entries: @entries %>
 <% end %>

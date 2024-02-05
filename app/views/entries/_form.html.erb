@@ -35,8 +35,7 @@
       </div>
     </div>
     <div class="col-md-5">
-      <%= turbo_frame_tag "entries_billing",
-        class: "d-flex flex-column justify-content-center align-items-stretch p-3 bg-light h-100 rounded" do %>
+      <%= turbo_frame_tag "entries_billing", class: "billing-box" do %>
         <% if @billing.nil? %>
           <%= render 'entries/billings/question' %>
         <% else %>
