@@ -14,6 +14,10 @@ class Entry < ApplicationRecord
 
   accepts_nested_attributes_for :billing
 
+  before_validation on: :create do
+    billing.user_id = user_id unless billing.nil?
+  end
+
   validates_presence_of :description, :date, :value
   validate :cannot_use_category_from_other_user,
     :cannot_use_discarded_category

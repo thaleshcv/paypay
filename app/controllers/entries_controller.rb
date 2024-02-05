@@ -22,8 +22,7 @@ class EntriesController < ApplicationController
   end
 
   def create
-    @entry = Entry.create(create_entry_params)
-    @billing = @entry.billing
+    @entry = current_user.entries.create(create_entry_params)
 
     if @entry.valid?
       redirect_to @entry, notice: t(".success")
