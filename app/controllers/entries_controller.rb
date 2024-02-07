@@ -6,10 +6,9 @@ class EntriesController < ApplicationController
   before_action :set_categories, only: %i[new edit]
 
   def index
-    @form = Entries::StatementForm.new
-    @form.assign_attributes(statement_form_params) if params.key?(:entry)
+    @form = Entries::StatementForm.new(statement_form_params)
 
-    @entries = @form.perform(policy_scope(Entry).order(date: :asc))
+    @entries = @form.perform(policy_scope(Entry.status_paid).order(date: :asc))
     @totals = Entries::TotalsSummary.new(@entries)
 
     @pendings_count = policy_scope(Entry.status_pending).count
@@ -62,7 +61,7 @@ class EntriesController < ApplicationController
   private
 
   def statement_form_params
-    params.require(:entry).permit(:date)
+    params.fetch(:entry, {}).permit(:month, :year)
   end
 
   def create_entry_params

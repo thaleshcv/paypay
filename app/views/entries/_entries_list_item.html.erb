@@ -15,7 +15,11 @@
       <%= t(item.status, scope: "status") %>
       &bull;
       <%= link_to edit_entry_status_path(item) do %>
-        <%= item.status_pending? ? "Confirmar pagamento" : "Retornar para pendente" %>
+        <% if item.status_pending? %>
+          Confirmar pagamento
+        <% else %>
+          Retornar para pendente
+        <% end %>
       <% end %>
     </small>
   </div>

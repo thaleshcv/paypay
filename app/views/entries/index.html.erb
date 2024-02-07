@@ -22,9 +22,13 @@
 </div>
 
 <div class="my-3 p-3 rounded bg-light">
-  <div class="hstack gap-3 justify-content-center">
-    <%= collection_link_to_month_entries(params.dig(:entry, :date)) %>
+  <div class="hstack gap-3" style="padding-bottom:2rem;overflow:auto;">
+    <%= collection_link_to_month_entries(@form.date) %>
   </div>
+</div>
+
+<div class="my-3">
+  <%= render 'totals_summary', totals: @totals, date: @form.date %>
 </div>
 
 <% if @entries.empty? %>
@@ -35,6 +39,5 @@
 <% end %>
 
 <% unless @entries.empty? %>
-  <%= render 'totals_summary', totals: @totals, date: @form.date %>
   <%= render 'entries/entries_list', entries: @entries %>
 <% end %>
