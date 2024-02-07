@@ -10,8 +10,8 @@
     <%= link_to '&laquo; Voltar para lançamentos'.html_safe, entries_path %>
 
     <span class="ms-auto">
-      <%= link_to 'Novo lançamento', new_entry_path %> /
-      <%= link_to 'Editar lançamento', edit_entry_path(@entry) %> /
+      <%= link_to 'Novo lançamento', new_entry_path %> &bull;
+      <%= link_to 'Editar lançamento', edit_entry_path(@entry) %> &bull;
       <%= link_to 'Excluir lançamento', @entry,
         class: "text-danger",
         data: {
@@ -47,10 +47,10 @@
     <p class="lead">
       <%= l(@entry.updated_at, format: :long) %>
     </p>
-  </div>
 
-  <div class="col-sm-12 col-md-6">
     <strong>Comentário</strong>
-    <p class="lead"><%= @entry.comment.present? ? @entry.comment : "Nenhum comentário adicionado." %></p>
+    <p class="lead">
+      <%= @entry.comment.present? ? @entry.comment : "Nenhum comentário adicionado." %>
+    </p>
   </div>
 </div>

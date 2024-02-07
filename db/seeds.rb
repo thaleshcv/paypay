@@ -29,8 +29,9 @@ months.each do |(m, y)|
       user: user,
       category: categories.sample,
       date: Date.new(y, m, days.sample),
-      description: Faker::Lorem.word.capitalize,
-      value: Faker::Number.decimal(l_digits: 3, r_digits: 2)
+      description: Faker::Lorem.sentence,
+      value: Faker::Number.decimal(l_digits: 3, r_digits: 2),
+      status: %w[pending paid].sample
     )
   end
 end

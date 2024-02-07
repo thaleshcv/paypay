@@ -3,7 +3,7 @@
   &laquo; Voltar para lançamentos
 <% end %>
 
-<div class="mt-3">
+<div class="mt-5">
   <% if @entries.empty? %>
     <%= notification type: "primary" do %>
       <i class="bi bi-exclamation-triangle"></i>&nbsp;
@@ -12,6 +12,11 @@
   <% end %>
 
   <% unless @entries.empty? %>
-    <%= render 'entries/entries_list', entries: @entries %>
+    <% group_entries_by_month(@entries).each do |month, entries| %>
+      <div class="mb-5">
+        <h4><%= month %></h4>
+        <%= render 'entries/entries_list', entries: entries %>
+      </div>
+    <% end %>
   <% end %>
 </div>

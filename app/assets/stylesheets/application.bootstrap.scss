@@ -2,6 +2,11 @@
 @import "bootstrap-icons/font/bootstrap-icons";
 @import "entries";
 
+html,
+body {
+  scroll-behavior: smooth;
+}
+
 .notification {
   @extend .shadow-sm;
   @extend .p-3;

@@ -11,14 +11,17 @@
     <p class="fs-2">
       <%= item.description %>
     </p>
-    <small class="text-muted text-uppercase">
-      <%= t(item.status, scope: "status") %>
+    <small class="text-muted">
+      Situação:
+      <strong class="text-uppercase">
+        <%= t(item.status, scope: "status") %>
+      </strong>
       &bull;
       <%= link_to edit_entry_status_path(item) do %>
         <% if item.status_pending? %>
-          Confirmar pagamento
+          Confirmar
         <% else %>
-          Retornar para pendente
+          Desfazer
         <% end %>
       <% end %>
     </small>
@@ -28,8 +31,8 @@
       <%= number_to_currency(item.value) %>
     </p>
     <small>
-      <%= link_to 'Detalhar', item %> /
-      <%= link_to 'Editar', edit_entry_path(item) %> /
+      <%= link_to 'Detalhar', item %> &bull;
+      <%= link_to 'Editar', edit_entry_path(item) %> &bull;
       <%= link_to 'Excluir',
           item,
           class: "text-danger",

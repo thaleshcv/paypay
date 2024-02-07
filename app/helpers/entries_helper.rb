@@ -2,6 +2,14 @@
 
 # Helper module for Entries.
 module EntriesHelper
+  def group_entries_by_month(entries)
+    entries.each_with_object({}) do |item, group|
+      key = l(item.date, format: "%b/%Y")
+      group[key] ||= []
+      group[key] << item
+    end
+  end
+
   def entry_billing_cycles_options
     (1..12).collect { |n| [n == 1 ? t("undefined") : n, n] }
   end
