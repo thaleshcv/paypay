@@ -6,42 +6,42 @@ module EntriesHelper
     (1..12).collect { |n| [n == 1 ? t("undefined") : n, n] }
   end
 
-  def group_entries_by_date(entries)
-    return entries if entries.blank?
+  def collection_link_to_month_entries(current_date, count: 12)
+    puts "current #{current_date}"
+    current_date = (current_date || Date.today).change(day: 1)
+    count ||= 12
 
-    entries.group_by(&:date)
+    final_date = [current_date + count.months, Date.today].min
+
+    count.times.collect do |i|
+      next_date = final_date - i.months
+      is_current = same_month_and_year(next_date, current_date)
+
+      link_to_month_entries(next_date, disabled: is_current)
+    end.reverse.join.html_safe
   end
 
-  def link_to_next_month_entries(current)
-    raise ArgumentError, "argument should be Date or DateTime." unless current.is_a?(Date)
+  def link_to_month_entries(current_date, disabled: false, &block)
+    raise ArgumentError, "argument should be Date or DateTime." unless current_date.is_a?(Date)
 
-    link_to_month_entries(current.next_month) do |label|
-      "#{label} &raquo;".html_safe
-    end
-  end
+    link_label = I18n.l(current_date, format: "%b/%Y")
+    date_params = date_to_multi_params(current_date.change(day: 1))
 
-  def link_to_prev_month_entries(current)
-    raise ArgumentError, "argument should be Date or DateTime." unless current.is_a?(Date)
-
-    link_to_month_entries(current.prev_month) do |label|
-      "&laquo; #{label}".html_safe
-    end
-  end
-
-  def link_to_month_entries(date, &block)
-    raise ArgumentError, "argument should be Date or DateTime." unless date.is_a?(Date)
-
-    link_label = I18n.l(date, format: :month_and_year)
-    date_params = date_to_multi_params(date.change(day: 1))
+    link_classes = %w[btn btn-small]
+    link_classes << "disabled" if disabled
 
     if block_given?
-      link_to(entries_path(entry: date_params)) { block.call(link_label) }
+      link_to(entries_path(entry: date_params), class: link_classes) { block.call(link_label) }
     else
-      link_to(link_label, entries_path(entry: date_params))
+      link_to(link_label, entries_path(entry: date_params), class: link_classes)
     end
   end
 
   private
+
+  def same_month_and_year(first, last)
+    [first.month, first.year] == [last.month, last.year]
+  end
 
   def date_to_multi_params(date)
     %i[day month year].each_with_object({}) do |type, params|

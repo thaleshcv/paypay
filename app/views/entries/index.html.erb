@@ -22,24 +22,8 @@
 </div>
 
 <div class="my-3 p-3 rounded bg-light">
-  <div class="row align-items-end">
-    <div class="col">
-      <%= link_to_prev_month_entries(@form.date) %>
-    </div>
-    <div class="col text-center">
-      <%= form_with model: @form, url: entries_path, method: :get,
-      scope: :entry, data: {controller: "submit"} do |f| %>
-        <%= f.label :date, "Selecione o período", class: "form-label" %>
-        <div class="d-flex">
-          <%= f.date_select :date,
-          {order: [:month, :year], end_year: Date.today.year.next},
-          {class: "form-select"} %>
-        </div>
-      <% end %>
-    </div>
-    <div class="col text-end">
-      <%= link_to_next_month_entries(@form.date) %>
-    </div>
+  <div class="hstack gap-3 justify-content-center">
+    <%= collection_link_to_month_entries(params.dig(:entry, :date)) %>
   </div>
 </div>
 

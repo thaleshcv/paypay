@@ -26,7 +26,7 @@ class Entry < ApplicationRecord
     where(date: starting..ending)
   }
 
-  scope :where_date_before, ->(date) { where("date <= ?", date) }
+  scope :where_date_before, ->(current_date) { where("date <= ?", current_date) }
   scope :where_date_before_today, -> { where_date_before(Date.today) }
 
   # Overrides the default +to_param+ method.
