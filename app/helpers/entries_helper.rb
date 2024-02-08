@@ -14,27 +14,27 @@ module EntriesHelper
     (1..12).collect { |n| [n == 1 ? t("undefined") : n, n] }
   end
 
-  def collection_link_to_month_entries(current_date, count: 12)
-    current_date = (current_date || Date.today).change(day: 1)
+  def collection_link_to_month_entries(current_entry_date, count: 12)
+    current_entry_date = (current_entry_date || Date.today).change(day: 1)
     count ||= 12
 
-    final_date = [current_date + count.months, Date.today].min
+    final_date = [current_entry_date + count.months, Date.today].min
 
     count.times.collect do |i|
       next_date = final_date - i.months
-      is_current = same_month_and_year(next_date, current_date)
+      is_current = same_month_and_year(next_date, current_entry_date)
 
       link_to_month_entries(next_date, active: is_current)
     end.reverse.join.html_safe
   end
 
-  def link_to_month_entries(current_date, active: false, &block)
-    raise ArgumentError, "argument should be Date or DateTime." unless current_date.is_a?(Date)
+  def link_to_month_entries(current_entry_date, active: false, &block)
+    raise ArgumentError, "argument should be Date or DateTime." unless current_entry_date.is_a?(Date)
 
-    link_label = I18n.l(current_date, format: "%b %Y")
+    link_label = I18n.l(current_entry_date, format: "%b %Y")
     date_params = {
-      month: current_date.month,
-      year: current_date.year
+      month: current_entry_date.month,
+      year: current_entry_date.year
     }
 
     link_classes = %w[btn btn-small btn-outline-primary]
