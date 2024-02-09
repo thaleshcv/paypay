@@ -8,6 +8,10 @@ module Entries
       @entries.sum(:value)
     end
 
+    def count
+      @entries.count
+    end
+
     private
 
     attr_reader :entries

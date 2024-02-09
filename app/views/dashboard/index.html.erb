@@ -1,7 +1,17 @@
-<h1>Dashboard#index</h1>
-<p>Find me in app/views/dashboard/index.html.erb</p>
+<h1>
+  Bem-vindo
+  <small class="text-body-secondary fst-italic"><%= current_user.nick_name %></small>
+</h1>
 
-<ul>
-  <li><%= link_to 'Categorias', categories_path %></li>
-  <li><%= link_to 'Lançamentos', entries_path %></li>
-</ul>
+<%= render 'entries/totals_summary', date: Date.today, totals: @totals %>
+
+<div class="row row-cols-2">
+  <div class="col">
+    <h3>Lançamentos atrasados</h3>
+    <%= render 'entries/entries_list', entries: @pending_entries %>
+  </div>
+  <div class="col">
+    <h3>Próximos lançamentos</h3>
+    <%= render 'entries/entries_list', entries: @next_entries %>
+  </div>
+</div>

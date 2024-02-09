@@ -1,6 +1,6 @@
-<div class="row">
+<div class="row align-items-center">
   <div class="col-auto px-5 text-center">
-    <p class="fs-2">
+    <p class="fs-4">
       <%= item.date.day %>
     </p>
     <span class="text-muted text-uppercase">
@@ -8,7 +8,7 @@
     </span>
   </div>
   <div class="col">
-    <p class="fs-2">
+    <p class="fs-6">
       <%= item.description %>
     </p>
     <small class="text-muted">
@@ -27,7 +27,7 @@
     </small>
   </div>
   <div class="col-auto text-end">
-    <p class="fs-2">
+    <p class="fs-4">
       <%= number_to_currency(item.value) %>
     </p>
     <small>

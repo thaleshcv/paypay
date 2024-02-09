@@ -1,19 +1,22 @@
-<div class="my-5 row justify-content-center text-center">
-  <div class="col-xs-6 col-auto">
-    <small class="text-muted">
-      Período
-    </small>
-    <p class="fs-4 text-primary">
-      <%= I18n.l(date, format: :month_and_year) %>
-    </p>
+<div class="my-5 row gap-3">
+  <div class="col-xs-6 col-md-auto">
+    <%= entries_summary_item(
+      icon: "bi bi-calendar-check",
+      title: "Período",
+      text: I18n.l(date, format: :month_and_year)) %>
+  </div>
+
+  <div class="col-xs-6 col-md-auto">
+    <%= entries_summary_item(
+      icon: "bi bi-arrow-left-right",
+      title: "Lançamentos",
+      text: totals.count) %>
   </div>
 
   <div class="col-xs-6 col-auto">
-    <small class="text-muted">
-      Total
-    </small>
-    <p class="fs-4 text-primary">
-      <%= number_to_currency totals.balance %>
-    </p>
+    <%= entries_summary_item(
+      icon: "bi bi-cash-stack",
+      title: "Total",
+      text: number_to_currency(totals.balance)) %>
   </div>
 </div>
