@@ -5,7 +5,7 @@ class DashboardController < ApplicationController
   def index
     @next_entries = policy_scope(Entry)
       .status_pending
-      .where_date_between(Date.today, Date.today + 15.days)
+      .where_date_between(Date.today, Date.today.days_since(15))
       .order(date: :asc)
       .limit(5)
 
@@ -15,13 +15,12 @@ class DashboardController < ApplicationController
       .limit(5)
 
     @totals = begin
-      starting_at = Date.today.change(day: 1)
-      ending_at = Date.today.change(day: -1)
+      starting, ending = Date.today.all_month.minmax
 
       paid_entries_on_current_month =
         policy_scope(Entry)
           .status_paid
-          .where_date_between(starting_at, ending_at)
+          .where_date_between(starting, ending)
 
       Entries::TotalsSummary.new(paid_entries_on_current_month)
     end

@@ -2,22 +2,6 @@
 
 # Helper module for Entries.
 module EntriesHelper
-  def entries_summary_item(icon:, title:, text:)
-    icon_content = content_tag :div, class: "fs-1 text-primary" do
-      content_tag :i, nil, class: icon
-    end
-
-    text_content = content_tag :div, class: "ms-2" do
-      concat(content_tag(:small, title, class: "text-muted"))
-      concat(content_tag(:div, text, class: "fs-4 text-primary"))
-    end
-
-    content_tag :div, class: "d-flex align-items-center" do
-      concat(icon_content)
-      concat(text_content)
-    end
-  end
-
   def group_entries_by_month(entries)
     entries.each_with_object({}) do |item, group|
       key = l(item.date, format: "%b/%Y")
@@ -31,7 +15,7 @@ module EntriesHelper
   end
 
   def collection_link_to_month_entries(current_entry_date, count: 12)
-    current_entry_date = (current_entry_date || Date.today).change(day: 1)
+    current_entry_date = (current_entry_date || Date.today).beginning_of_month
     count ||= 12
 
     final_date = [current_entry_date + count.months, Date.today].min

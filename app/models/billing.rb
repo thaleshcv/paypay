@@ -26,10 +26,9 @@ class Billing < ApplicationRecord
     while (cycles == 1 && current_entry_date < Date.today) || (cycles > 1 && entries.count < cycles)
       # ignore the month of the first entry
       current_entry_date = current_entry_date.next_month
-      starting_date = current_entry_date.dup.change(day: 1).beginning_of_day
-      ending_date = current_entry_date.dup.change(day: -1).end_of_day
+      starting, ending = current_entry_date.all_month.minmax
 
-      next unless entries.where_date_between(starting_date, ending_date).count.zero?
+      next unless entries.where_date_between(starting.beginning_of_day, ending.end_of_day).count.zero?
 
       entries.create(
         user_id: user_id,

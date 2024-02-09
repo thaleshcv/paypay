@@ -14,10 +14,8 @@ module Entries
     end
 
     def perform(base_scope)
-      starting = date.change(day: 1).beginning_of_day
-      ending = date.change(day: -1).end_of_day
-
-      base_scope.where_date_between(starting, ending)
+      starting, ending = date.all_month.minmax
+      base_scope.where_date_between(starting.beginning_of_day, ending.end_of_day)
     end
   end
 end
