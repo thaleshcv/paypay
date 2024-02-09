@@ -8,16 +8,26 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
-return unless Rails.env.development?
-
 puts "---------------- RUNNING SEED ----------------"
 
+[
+  "Alimentação",
+  "Moradia",
+  "Transporte",
+  "Saúde",
+  "Educação",
+  "Lazer",
+  "Vestuário",
+  "Dívidas",
+  "Impostos/Taxas",
+  "Doações/Caridade"
+].sort.each { |name| Category.create!(name: name) }
+
+# SEED FOR DEVELOPMENT ONLY
+
+return unless Rails.env.development?
+
 user = User.create!(email: "user@example.org", password: "sekret")
-
-10.times do
-  Category.create!(name: Faker::Lorem.word.capitalize)
-end
-
 categories = Category.all
 
 days = (1..25).to_a
