@@ -9,7 +9,10 @@ module ApplicationHelper
   end
 
   def user_avatar(user)
-    content_tag :span, user.email[0].upcase, class: "user-avatar"
+    image_tag user.safe_avatar_url,
+      class: "img-responsive rounded-circle",
+      width: "38",
+      height: "auto"
   end
 
   def dismiss_button(target)
