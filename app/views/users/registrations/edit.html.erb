@@ -1,90 +1,13 @@
-<h1>Meu perfil</h1>
-
-<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= f.error_notification %>
-
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
+<%= turbo_frame_tag "user-account" do %>
+  <% if params[:what] == "basic" %>
+    <%= render 'basic' %>
   <% end %>
 
-  <div class="row">
-    <div class="col-md-auto" data-controller="image-preview">
-      <div class="d-flex flex-column">
-        <div>
-          <%= image_tag current_user.safe_avatar_url,
-            class: "img-thumbnail rounded-circle d-block mx-auto",
-            width: "256",
-            height: "auto",
-            data: { "image-preview-target" => "image" } %>
-        </div>
-        <div class="d-grid gap-2 d-md-block">
-          <%= f.label :avatar, class: "btn btn-info" do %>
-            Selecionar imagem
-            <i class="bi bi-cloud-arrow-up-fill"></i>
-            <%= f.file_field :avatar,
-                accept: "image/*",
-                class: "d-none",
-                data: {"image-preview-target" => "input"},
-                hidden: true %>
-          <% end %>
-          <span class="btn btn-info" data-action="click->image-preview#restore">
-            <i class="bi bi-arrow-counterclockwise"></i>
-          </span>
-        </div>
-      </div>
-    </div>
+  <% if params[:what] == "password" %>
+    <%= render 'password' %>
+  <% end %>
 
-    <div class="col-md">
-      <%= f.input :name, autofocus: true %>
-      <%= f.input :email, required: true %>
-    </div>
-
-    <div class="col-12">
-      <fieldset class="py-3">
-        <legend>Alterar senha?</legend>
-        <p class="small fst-italic">Preencha apenas se deseja alterar sua senha.</p>
-
-        <div class="row">
-          <div class="col-md-6">
-            <%= f.input :password,
-                required: false,
-                label: "Nova senha",
-                input_html: { autocomplete: "new-password" } %>
-          </div>
-          <div class="col-md-6">
-            <%= f.input :password_confirmation,
-                required: false,
-                label: "Confirme sua nova senha",
-                input_html: { autocomplete: "new-password" } %>
-          </div>
-        </div>
-      </fieldset>
-
-      <fieldset>
-        <legend>Confirme sua senha</legend>
-        <p class="small fst-italic">Informe sua senha atual para confirmar suas alterações.</p>
-        <%= f.input :current_password,
-          required: true,
-          input_html: { autocomplete: "current-password" } %>
-      </fieldset>
-    </div>
-    <div class="col-12">
-      <%= f.submit class: "btn btn-primary" %>
-      <%= link_to 'Cancelar', dashboard_path, class: "btn btn-secondary" %>
-    </div>
-  </div>
+  <% if params[:what] == "destroy" %>
+    <%= render 'destroy' %>
+  <% end %>
 <% end %>
-
-<div class="card border-danger mt-5" >
-  <div class="card-header bg-danger text-white">Excluir meu perfil</div>
-  <div class="card-body text-danger">
-    <h5 class="card-title">Não está satisfeito?</h5>
-    <p class="card-text py-3">
-      <%= button_to "Excluir meu perfil!",
-        registration_path(resource_name),
-        data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" },
-        method: :delete,
-        class: "btn btn-lg btn-danger float-end" %>
-    </p>
-  </div>
-</div>

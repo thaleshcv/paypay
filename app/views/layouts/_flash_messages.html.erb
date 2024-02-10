@@ -1,4 +1,4 @@
-<div class="toast-container position-fixed top-0 end-0 p-3"
+<div id="flash-messages" class="toast-container position-fixed top-0 end-0 p-3"
   data-controller="toast">
   <% [%w[notice success], %w[alert danger]].each do |(type, color)| %>
     <% if flash.key?(type) %>

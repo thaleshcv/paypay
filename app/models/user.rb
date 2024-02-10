@@ -10,7 +10,7 @@ class User < ApplicationRecord
   has_many :billings, inverse_of: :user
 
   before_validation on: :create do
-    self.name = email.split("@").first unless email.blank?
+    self.name = email.split("@").first if name.blank? && email.present?
   end
 
   def nick_name

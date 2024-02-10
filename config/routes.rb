@@ -5,14 +5,15 @@ Rails.application.routes.draw do
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check
 
-  get "/", to: redirect("/dashboard")
-
-  devise_for :users, controllers: {
-    registrations: "users/registrations"
-  }
+  devise_for :users, controllers: { registrations: "users/registrations" }
 
   authenticate :user do
+    get "/", to: redirect("/dashboard")
     get "dashboard", to: "dashboard#index"
+
+    devise_scope :user do
+      get "/users/account", to: "users/registrations#show", as: :user_account
+    end
 
     namespace :entries do
       resource :billing, only: %i[show new]

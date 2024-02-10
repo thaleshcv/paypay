@@ -1,0 +1,20 @@
+<div class="row align-items-center">
+  <div class="col-md-auto">
+    <%= image_tag current_user.safe_avatar_url,
+      class: "img-thumbnail rounded-circle d-block mx-auto",
+      width: "256",
+      height: "auto" %>
+  </div>
+  <div class="col-md">
+    <h3><%= current_user.name %></h3>
+    <p class="fs-5"><%= current_user.email %></p>
+    <p class="fs-5">Desde <%= l current_user.created_at.to_date, format: :long %></p>
+    <div class="fs-5 d-flex justify-content-between" style="width:100%;max-width:400px;">
+      <%= link_to 'Editar perfil', edit_user_registration_path(what: "basic") %>
+      &bull;
+      <%= link_to 'Alterar senha', edit_user_registration_path(what: "password") %>
+      &bull;
+      <%= link_to 'Excluir cadastro', edit_user_registration_path(what: "destroy"), class: "text-danger" %>
+    </div>
+  </div>
+</div>
