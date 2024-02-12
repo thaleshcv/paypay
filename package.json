@@ -12,7 +12,8 @@
     "nodemon": "^3.0.2",
     "postcss": "^8.4.33",
     "postcss-cli": "^11.0.0",
-    "sass": "^1.69.7"
+    "sass": "^1.69.7",
+    "vanilla-calendar-pro": "^2.9.3"
   },
   "scripts": {
     "build": "esbuild app/javascript/*.* --bundle --sourcemap --format=esm --outdir=app/assets/builds --public-path=/assets",

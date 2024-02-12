@@ -2,24 +2,14 @@
   <div class="row">
     <div class="col-md-7">
       <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-5 mb-3" data-controller="calendar">
+          <%= f.label :date, class: "form-label" %>
+          <div id="calendar-container" data-calendar-target="container"></div>
+          <%= f.input :date, label: false, as: :hidden, input_html: {data: {"calendar-target" => "input"}} %>
+        </div>
+        <div class="col-md-7">
           <%= f.input :description %>
-        </div>
-        <div class="col-md-6">
-          <%= f.association :category,
-          collection: @categories,
-          value_method: :id,
-          label_method: :name,
-          prompt: "Selecione a categoria",
-          required: true %>
-        </div>
-        <div class="col-md-6">
-          <%= f.input :date, as: :string, input_html: { type: 'date' } %>
-        </div>
-        <div class="col-md-6">
-          <%= f.input :value, as: :string, input_html: {data: { mask_target: "currency" }} %>
-        </div>
-        <div class="col-md-6">
+          <%= f.input :value, as: :string, input_html: {class: "fs-1", data: { mask_target: "currency" }} %>
           <%= label_tag nil, "Situação", class: "form-label" %>
           <div class="d-flex align-items mb-3">
             <%= f.label :status, "Pendente", class: "form-check-label me-2" %>
@@ -28,6 +18,14 @@
               <%= f.label :status, "Pago", class: "form-check-label" %>
             </div>
           </div>
+        </div>
+        <div class="col-md-6">
+          <%= f.association :category,
+          collection: @categories,
+          value_method: :id,
+          label_method: :name,
+          prompt: "Selecione a categoria",
+          required: true %>
         </div>
         <div class="col-12">
           <%= f.input :comment, input_html: { rows: 5 } %>

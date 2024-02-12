@@ -7,12 +7,13 @@
 @import "bootstrap-icons/font/bootstrap-icons";
 @import "entries";
 
+@import "vanilla-calendar-pro/build/vanilla-calendar.min";
+@import "vanilla-calendar-pro/build/themes/light.min";
+@import "vanilla-calendar-pro/build/themes/dark.min";
+
 html,
 body {
   scroll-behavior: smooth;
-}
-
-.user-avatar {
 }
 
 .notification {

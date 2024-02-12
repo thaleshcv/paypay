@@ -783,6 +783,11 @@ update-browserslist-db@^1.0.13:
     escalade "^3.1.1"
     picocolors "^1.0.0"
 
+vanilla-calendar-pro@^2.9.3:
+  version "2.9.3"
+  resolved "https://registry.yarnpkg.com/vanilla-calendar-pro/-/vanilla-calendar-pro-2.9.3.tgz#b3a9771c97ce93797a0c403dbd2370e802481d5f"
+  integrity sha512-pRQpruEzM5ryZa80ZCuSXOBPcqzzBKif6sIUfemp+4SbG0srBGyL5+EGxNzzirikM/4HYZGLMsn9zSJ2BvJ6/w==
+
 wrap-ansi@^7.0.0:
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/wrap-ansi/-/wrap-ansi-7.0.0.tgz#67e145cff510a6a6984bdf1152911d69d2eb9e43"
