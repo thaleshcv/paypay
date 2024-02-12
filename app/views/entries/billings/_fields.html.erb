@@ -1,7 +1,7 @@
 <fieldset>
   <legend class="d-flex align-items-center justify-content-between">
     <span>Criar recorrência</span>
-    <%= link_to "", entries_billing_path, class: "btn-close", aria: {label: "Close"} %>
+    <%= link_to "", entries_billing_path, class: "btn-close btn-sm", aria: {label: "Close"} %>
   </legend>
   <%= fields model: Entry.new do |fields| %>
     <%= fields.simple_fields_for :billing, @billing do |b| %>
