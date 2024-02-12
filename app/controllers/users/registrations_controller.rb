@@ -46,6 +46,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   protected
 
+  # Overwrite the default implemantion to call our +full_update_with_password+
+  # instead of the original +update_with_password+.
+  def update_resource(resource, params)
+    resource.full_update_with_password(params)
+  end
+
   def after_update_path_for(_resource)
     sign_in_after_change_password? ? user_account_path : new_session_path(resource_name)
   end

@@ -24,4 +24,23 @@ class User < ApplicationRecord
       "https://robohash.org/#{Digest::MD5.hexdigest(email)}"
     end
   end
+
+  # Similar tp +update_with_password+ provided by Devise.
+  # The difference is that this will not delete +:password+ and +:password_confirmation+
+  # keys from params.
+  def full_update_with_password(params)
+    current_password = params.delete(:current_password)
+
+    result = if valid_password?(current_password)
+      update(params)
+    else
+      assign_attributes(params)
+      valid?
+      errors.add(:current_password, current_password.blank? ? :blank : :invalid)
+      false
+    end
+
+    clean_up_passwords
+    result
+  end
 end
