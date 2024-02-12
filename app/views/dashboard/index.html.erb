@@ -3,7 +3,24 @@
   <small class="text-body-secondary fst-italic"><%= current_user.nick_name %></small>
 </h1>
 
-<%= render 'entries/totals_summary', date: Date.today, totals: @totals %>
+<div class="row align-items-center my-5">
+  <div class="col-sm-12 col-md">
+    <%= render 'entries/totals_summary', date: Date.today, totals: @totals %>
+  </div>
+  <div class="col-sm-12 col-md-auto">
+    <div class="row row-cols-3">
+      <div>
+        <%= link_to 'Novo lançamento', new_entry_path %>
+      </div>
+      <div>
+        <%= link_to 'Ver lançamentos', entries_path %>
+      </div>
+      <div>
+        <%= link_to 'Lançamentos atrasados', pending_entries_path %>
+      </div>
+    </div>
+  </div>
+</div>
 
 <div class="row row-cols-2">
   <div class="col">
