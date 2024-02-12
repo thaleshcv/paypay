@@ -2,6 +2,13 @@
 
 # Helper module for Entries.
 module EntriesHelper
+  def category_toggle_radio_button(builder)
+    [
+      builder.radio_button(class: "btn-check", autocomplete: "off"),
+      builder.label(class: "btn btn-outline-primary rounded-pill m-1")
+    ].join.html_safe
+  end
+
   def group_entries_by_month(entries)
     entries.each_with_object({}) do |item, group|
       key = l(item.date, format: "%b/%Y")

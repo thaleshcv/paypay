@@ -19,13 +19,13 @@
             </div>
           </div>
         </div>
-        <div class="col-md-6">
-          <%= f.association :category,
-          collection: @categories,
-          value_method: :id,
-          label_method: :name,
-          prompt: "Selecione a categoria",
-          required: true %>
+        <div class="col-md-12 mb-3">
+          <%= f.label :category %>
+          <div class="d-flex flex-wrap justify-content-start">
+            <%= f.collection_radio_buttons :category_id, @categories, :id, :name do |b| %>
+              <%= category_toggle_radio_button(b) %>
+            <% end %>
+          </div>
         </div>
         <div class="col-12">
           <%= f.input :comment, input_html: { rows: 5 } %>

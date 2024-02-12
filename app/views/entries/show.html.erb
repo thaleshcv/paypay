@@ -30,7 +30,7 @@
 
     <strong>Categoria</strong>
     <p class="lead">
-      <%= @entry.category.name %>
+      <%= @entry.category&.name || "Não categorizado" %>
     </p>
 
     <strong>Data</strong>
