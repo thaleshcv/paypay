@@ -11,7 +11,7 @@
     <%= yield(:head) %>
   </head>
 
-  <body id="">
+  <body id="<%= "#{controller_name}-#{action_name}" %>">
     <main class="pb-5" style="min-height:75vh;">
       <%= content_for?(:content) ? yield(:content) : yield %>
     </main>

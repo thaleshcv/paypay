@@ -58,3 +58,7 @@ pt-BR:
     update:
       success: Lançamento atualizado com sucesso.
       fail: Erro ao atualizar lançamento.
+  users:
+    registrations:
+      update:
+        success: Cadastro atualizado com sucesso.

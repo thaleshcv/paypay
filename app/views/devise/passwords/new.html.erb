@@ -1,0 +1,28 @@
+<div class="container">
+  <div class="row align-items-center pt-5 mt-5">
+    <div class="col-md-8 text-center">
+      <%= image_tag 'logo-no-background',
+        class: "img-fluid",
+        width: "50%",
+        alt: "PayPay logo" %>
+    </div>
+    <div class="col-md-4">
+      <h2>Esqueceu sua senha?</h2>
+      <%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+        <%= f.error_notification %>
+        <div class="form-inputs">
+          <%= f.input :email,
+                required: true,
+                autofocus: true,
+                input_html: { autocomplete: "email" } %>
+        </div>
+        <div class="d-grid">
+          <%= f.button :submit, "Reiniciar minha senha", class: "btn btn-primary" %>
+        </div>
+      <% end %>
+      <div class="mt-3">
+        <%= render "devise/shared/links" %>
+      </div>
+    </div>
+  </div>
+</div>
