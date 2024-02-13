@@ -4,11 +4,15 @@
 class StatusesController < ApplicationController
   before_action :set_entry
 
-  def edit; end
+  def edit
+    remember_origin("entry-#{@entry.id}-status-edit")
+  end
 
   def update
     if @entry.toggle_status(status_params)
-      redirect_to pending_entries_path, notice: t(".success")
+      redirect_to_saved_origin("entry-#{@entry.id}-status-edit",
+        fallback: pending_entries_path,
+        notice: t(".success"))
     else
       render :edit, status: :unprocessable_entity, alert: t(".fail")
     end

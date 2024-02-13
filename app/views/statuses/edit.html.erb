@@ -16,7 +16,7 @@
       Categoria
     </span>
     <p class="lead">
-      <%= @entry.category.name %>
+      <%= @entry.category&.name || "Não categorizado" %>
     </p>
   </div>
 </div>

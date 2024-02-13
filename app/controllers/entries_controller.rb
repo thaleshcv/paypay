@@ -5,6 +5,8 @@ class EntriesController < ApplicationController
   before_action :set_entry, only: %i[show edit update destroy]
   before_action :set_categories, only: %i[new edit]
 
+  helper_method :new_entry_origin
+
   def index
     @form = Entries::StatementForm.new(statement_form_params)
 
@@ -17,6 +19,7 @@ class EntriesController < ApplicationController
   def show; end
 
   def new
+    remember_origin("entry-new")
     @entry = Entry.new
   end
 
@@ -24,7 +27,9 @@ class EntriesController < ApplicationController
     @entry = current_user.entries.create(create_entry_params)
 
     if @entry.valid?
-      redirect_to @entry, notice: t(".success")
+      redirect_to_saved_origin("entry-new",
+        fallback: @entry,
+        notice: t(".success"))
     else
       set_categories
       render :new, status: :unprocessable_entity, alert: t(".fail")
@@ -34,11 +39,15 @@ class EntriesController < ApplicationController
     render :new, status: :unprocessable_entity, alert: e.message
   end
 
-  def edit; end
+  def edit
+    remember_origin("entry-#{@entry.id}-edit")
+  end
 
   def update
     if @entry.update(update_entry_params)
-      redirect_to @entry, notice: t(".success")
+      redirect_to_saved_origin("entry-#{@entry.id}-edit",
+        fallback: @entry,
+        notice: t(".success"))
     else
       set_categories
       render :edit, status: :unprocessable_entity, alert: t(".fail")
@@ -46,8 +55,10 @@ class EntriesController < ApplicationController
   end
 
   def destroy
+    source_path = (URI(request.referer).path unless request.referer&.end_with?(entry_path(@entry)))
+
     @entry.destroy
-    redirect_to entries_path, notice: t(".success")
+    redirect_to source_path || root_path, notice: t(".success")
   end
 
   def pending
@@ -59,6 +70,10 @@ class EntriesController < ApplicationController
   end
 
   private
+
+  def new_entry_origin
+    read_origin("entry-new") || entries_path
+  end
 
   def statement_form_params
     params.fetch(:entry, {}).permit(:month, :year)

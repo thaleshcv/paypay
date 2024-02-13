@@ -12,6 +12,25 @@ class ApplicationController < ActionController::Base
 
   private
 
+  def remember_origin(key)
+    return if request.referer.blank?
+
+    session[key.to_s] = URI(request.referer).path
+  end
+
+  def forget_origin(key)
+    session.delete(key.to_s)
+  end
+
+  def read_origin(key)
+    session[key.to_s]
+  end
+
+  def redirect_to_saved_origin(key, fallback: nil, **args)
+    saved_origin = forget_origin(key) || fallback
+    redirect_to saved_origin || root_path, args
+  end
+
   def render_not_found
     render file: Rails.root.join("public", "404.html"), status: :not_found
   end

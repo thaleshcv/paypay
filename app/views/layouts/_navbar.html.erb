@@ -42,9 +42,11 @@
             <li><hr class="dropdown-divider"></li>
             <li>
               <%= link_to 'Logout',
-                user_session_path,
+                destroy_user_session_path,
                 class: "dropdown-item text-primary",
-                data: { turbo_method: "delete" } %>
+                data: {
+                  turbo_confirm: "Are you sure?",
+                  turbo_method: "delete" } %>
             </li>
           </ul>
         </li>
