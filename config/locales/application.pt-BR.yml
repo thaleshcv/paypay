@@ -16,6 +16,7 @@ pt-BR:
         current_password: Senha atual
         email: Email
         avatar: Avatar
+        remember_me: Lembrar de mim
       entry:
         description: Descrição
         category: Categoria
