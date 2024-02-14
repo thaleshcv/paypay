@@ -1,14 +1,8 @@
-<h1>
-  Lançamento /
-  <small class="text-body-secondary">
-    <%= @entry.description %>
-  </small>
-</h1>
+<h1>Lançamento</h1>
 
 <div class="my-3">
   <div class="d-flex">
     <%= link_to '&laquo; Voltar para lançamentos'.html_safe, entries_path %>
-
     <span class="ms-auto">
       <%= link_to 'Novo lançamento', new_entry_path %> &bull;
       <%= link_to 'Editar lançamento', edit_entry_path(@entry) %> &bull;
@@ -21,36 +15,40 @@
   </div>
 </div>
 
-<div class="row my-3">
-  <div class="col-sm-12 col-md-6">
-    <strong>Valor</strong>
-    <p class="lead">
-      <%= number_to_currency(@entry.value) %>
-    </p>
+<div class="p-4 bg-dark rounded">
+  <div class="row my-3">
+    <div class="col-sm-12 col-md-6">
+      <h2 class="mb-4"><%= @entry.description %></h2>
 
-    <strong>Categoria</strong>
-    <p class="lead">
-      <%= @entry.category&.name || "Não categorizado" %>
-    </p>
+      <strong>Valor</strong>
+      <p class="lead">
+        <%= number_to_currency(@entry.value) %>
+      </p>
 
-    <strong>Data</strong>
-    <p class="lead">
-      <%= l(@entry.date, format: :long) %>
-    </p>
+      <strong>Categoria</strong>
+      <p class="lead">
+        <%= @entry.category&.name || "Não categorizado" %>
+      </p>
 
-    <strong>Incluído em</strong>
-    <p class="lead">
-      <%= l(@entry.created_at, format: :long) %>
-    </p>
+      <strong>Data</strong>
+      <p class="lead">
+        <%= l(@entry.date, format: :long) %>
+      </p>
 
-    <strong>Última alteração em</strong>
-    <p class="lead">
-      <%= l(@entry.updated_at, format: :long) %>
-    </p>
+      <strong>Incluído em</strong>
+      <p class="lead">
+        <%= l(@entry.created_at, format: :long) %>
+      </p>
 
-    <strong>Comentário</strong>
-    <p class="lead">
-      <%= @entry.comment.present? ? @entry.comment : "Nenhum comentário adicionado." %>
-    </p>
+      <strong>Última alteração em</strong>
+      <p class="lead">
+        <%= l(@entry.updated_at, format: :long) %>
+      </p>
+
+      <strong>Comentário</strong>
+      <p class="lead">
+        <%= @entry.comment.present? ? @entry.comment : "Nenhum comentário adicionado." %>
+      </p>
+    </div>
   </div>
 </div>

@@ -5,7 +5,7 @@ class EntriesController < ApplicationController
   before_action :set_entry, only: %i[show edit update destroy]
   before_action :set_categories, only: %i[new edit]
 
-  helper_method :new_entry_origin
+  helper_method :cancel_entry_path
 
   def index
     @form = Entries::StatementForm.new(statement_form_params)
@@ -71,8 +71,10 @@ class EntriesController < ApplicationController
 
   private
 
-  def new_entry_origin
-    read_origin("entry-new") || entries_path
+  def cancel_entry_path
+    return entries_path if @entry.nil?
+
+    @entry.new_record? ? read_origin("entry-new") : read_origin("entry-#{@entry.id}-edit")
   end
 
   def statement_form_params

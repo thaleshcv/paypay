@@ -12,6 +12,10 @@ export default class extends Controller {
       currentDateValue = new Date().toISOString().split("T")[0];
     }
 
+    const [currentDateYear, currentDateMonth, _] = currentDateValue
+      .split("-")
+      .map((i) => parseInt(i));
+
     this.calendar = new VanillaCalendar(this.containerTarget, {
       actions: {
         clickDay(_event, calendar) {
@@ -27,7 +31,9 @@ export default class extends Controller {
           today: false
         },
         selected: {
-          dates: [currentDateValue]
+          dates: [currentDateValue],
+          month: currentDateMonth - 1,
+          year: currentDateYear
         }
       }
     });
