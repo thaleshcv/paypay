@@ -1,0 +1,7 @@
+<% [%w[notice success], %w[alert danger]].each do |(type, color)| %>
+  <% if flash.key?(type) %>
+    <div class="alert alert-<%= color %>">
+      <p><%= flash[type] %></p>
+    </div>
+  <% end %>
+<% end %>
