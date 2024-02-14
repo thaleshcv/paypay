@@ -19,7 +19,7 @@ module Entries::TotalsSummaryHelper
 
   def text_content(title, text)
     content_tag :div, class: "ms-2" do
-      concat(content_tag(:small, title, class: "text-muted"))
+      concat(content_tag(:small, title, class: "text-white"))
       concat(content_tag(:div, text, class: "fs-4 text-primary"))
     end
   end

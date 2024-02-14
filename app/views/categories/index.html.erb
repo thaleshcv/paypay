@@ -4,29 +4,10 @@
   <%= link_to 'Nova categoria', new_category_path %>
 </div>
 
-<ul class="list-group">
-  <% @categories.each do |category| %>
-    <li class="list-group-item list-group-item-action">
-      <div class="mb-2 d-flex w-100 justify-content-between">
-        <h5><%= category.name %></h5>
-      </div>
-      <% if category.user_id.blank? %>
-        <small>Categoria do sistema</small>
-      <% else %>
-        <div class="d-flex align-items-end justify-content-between">
-          <small>Categoria personalizada</small>
-          <small>
-            <%= link_to 'Editar', edit_category_path(category) %> /
-            <%= link_to 'Excluir',
-              category,
-              class: "text-danger",
-              data: {
-                turbo_confirm: t("exclusion.confim"),
-                turbo_method: :delete
-              } %>
-          </small>
-        </div>
-      <% end %>
-    </li>
+<div class="vstack gap-3">
+  <% @categories.each do |item| %>
+    <div class="p-2 bg-dark">
+      <%= render 'categories/categories_list_item', item: item %>
+    </div>
   <% end %>
-</ul>
+</div>

@@ -1,0 +1,23 @@
+<div class="row">
+  <div class="col">
+    <h5><%= item.name %></h5>
+    <% if item.user_id.blank? %>
+      <small>Categoria do sistema</small>
+    <% else %>
+      <div class="d-flex align-items-end justify-content-between">
+        <small>Categoria personalizada</small>
+        <small>
+          <%= link_to 'Editar', edit_category_path(item) %>
+          &bull;
+          <%= link_to 'Excluir',
+            item,
+            class: "text-danger",
+            data: {
+              turbo_confirm: t("exclusion.confirm"),
+              turbo_method: :delete
+            } %>
+        </small>
+      </div>
+    <% end %>
+  </div>
+</div>

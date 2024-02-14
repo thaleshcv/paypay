@@ -1,9 +1,9 @@
-<div class="row align-items-center">
+<div class="row align-items-center ">
   <div class="col-auto px-5 text-center">
     <p class="fs-4">
       <%= item.date.day %>
     </p>
-    <span class="text-muted text-uppercase">
+    <span class="text-uppercase">
       <%= l(item.date, format: "%b %Y") %>
     </span>
   </div>
@@ -11,7 +11,7 @@
     <p class="fs-6">
       <%= item.description %>
     </p>
-    <small class="text-muted">
+    <small>
       Situação:
       <strong class="text-uppercase">
         <%= t(item.status, scope: "status") %>

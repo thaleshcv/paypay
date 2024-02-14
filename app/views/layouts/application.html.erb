@@ -15,9 +15,11 @@
     <main class="pb-5" style="min-height:75vh;">
       <%= content_for?(:content) ? yield(:content) : yield %>
     </main>
-    <footer class="container border-top pt-5">
-      <p class="float-end"><a href onclick="document.body.scrollTop=0;document.documentElement.scrollTop=0;">Back to top</a></p>
-      <p>&copy; <%= Time.now.year %> PayPay, Inc. &bull; <a href="#">Privacy</a> &bull; <a href="#">Terms</a></p>
+    <footer class="py-5">
+      <div class="container">
+        <p class="float-end"><a href onclick="document.body.scrollTop=0;document.documentElement.scrollTop=0;">Back to top</a></p>
+        <p>&copy; <%= Time.now.year %> PayPay, Inc. &bull; <a href="#">Privacy</a> &bull; <a href="#">Terms</a></p>
+      </div>
     </footer>
   </body>
 </html>

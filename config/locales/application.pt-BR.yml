@@ -8,7 +8,10 @@ pt-BR:
       entry: Lançamento
       billing: Recorrência
       user: Usuário
+      category: Categoria
     attributes:
+      category:
+        name: Nome
       user:
         name: Nome
         password: Senha

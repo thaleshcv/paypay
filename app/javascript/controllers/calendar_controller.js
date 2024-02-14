@@ -22,7 +22,8 @@ export default class extends Controller {
         iso8601: false,
         lang: "pt-BR",
         visibility: {
-          themeDetect: false,
+          theme: "light",
+          themeDetect: true,
           today: false
         },
         selected: {

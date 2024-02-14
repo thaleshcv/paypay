@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md mb-4 bg-black" data-bs-theme="dark">
+<nav class="navbar navbar-expand-md mb-4 bg-dark" data-bs-theme="dark">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">
       <%= image_tag 'logo-no-background', width: "160", height: "auto" %>
@@ -35,10 +35,6 @@
             <li>
               <%= link_to 'Meu cadastro', user_account_path, class: "dropdown-item" %>
             </li>
-            <li>
-              <%= link_to 'Minha senha', "#", class: "dropdown-item" %>
-            </li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
             <li><hr class="dropdown-divider"></li>
             <li>
               <%= link_to 'Logout',

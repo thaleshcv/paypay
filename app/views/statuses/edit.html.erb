@@ -21,20 +21,22 @@
   </div>
 </div>
 
-<%= simple_form_for @entry, url: entry_status_path(@entry), data: {controller: "mask"} do |f| %>
-  <div class="row">
-    <div class="col-md-6">
-      <%= f.input :date, as: :string, input_html: { type: 'date' } %>
+<div class="p-4 bg-dark rounded">
+  <%= simple_form_for @entry, url: entry_status_path(@entry), data: {controller: "mask"} do |f| %>
+    <div class="row">
+      <div class="col-md-6">
+        <%= f.input :date, as: :string, input_html: { type: 'date' } %>
+      </div>
+      <div class="col-md-6">
+        <%= f.input :value, as: :string, input_html: {data: { mask_target: "currency" }} %>
+      </div>
+      <div class="col-md-12">
+        <%= f.input :comment, input_html: { rows: 5 } %>
+      </div>
+      <div class="col-md-12">
+        <%= f.submit class: "btn btn-primary" %>
+        <%= link_to 'Cancelar', pending_entries_path, class: "btn btn-secondary" %>
+      </div>
     </div>
-    <div class="col-md-6">
-      <%= f.input :value, as: :string, input_html: {data: { mask_target: "currency" }} %>
-    </div>
-    <div class="col-md-12">
-      <%= f.input :comment, input_html: { rows: 5 } %>
-    </div>
-    <div class="col-md-12">
-      <%= f.submit class: "btn btn-primary" %>
-      <%= link_to 'Cancelar', pending_entries_path, class: "btn btn-secondary" %>
-    </div>
-  </div>
-<% end %>
+  <% end %>
+</div>

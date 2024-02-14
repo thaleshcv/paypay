@@ -22,7 +22,7 @@ body {
   @extend .p-3;
   @extend .mb-3;
   @extend .rounded;
-  @extend .bg-light;
+  @extend .bg-dark;
 
   &.notification-primary {
     color: $primary;
