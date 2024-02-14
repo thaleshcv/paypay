@@ -82,6 +82,7 @@ GEM
     bootsnap (1.17.0)
       msgpack (~> 1.2)
     builder (3.2.4)
+    chronic (0.10.2)
     concurrent-ruby (1.2.2)
     connection_pool (2.4.1)
     crass (1.0.6)
@@ -248,6 +249,8 @@ GEM
     websocket-driver (0.7.6)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
+    whenever (1.0.0)
+      chronic (>= 0.6.3)
     zeitwerk (2.6.12)
 
 PLATFORMS
@@ -272,6 +275,7 @@ DEPENDENCIES
   stimulus-rails
   turbo-rails
   web-console
+  whenever (~> 1.0)
 
 RUBY VERSION
    ruby 3.1.3p185
