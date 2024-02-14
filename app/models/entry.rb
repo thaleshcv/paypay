@@ -10,7 +10,11 @@ class Entry < ApplicationRecord
 
   belongs_to :category, inverse_of: :entries, optional: true
   belongs_to :user, inverse_of: :entries
-  belongs_to :billing, inverse_of: :entries, optional: true, validate: true
+  belongs_to :billing,
+    inverse_of: :entries,
+    optional: true,
+    validate: true,
+    counter_cache: true
 
   accepts_nested_attributes_for :billing
 

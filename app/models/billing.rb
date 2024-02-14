@@ -2,6 +2,8 @@
 
 # Billing model.
 class Billing < ApplicationRecord
+  enum :status, %i[active suspended], prefix: true
+
   belongs_to :user, inverse_of: :billings
   has_many :entries, inverse_of: :billing
 
@@ -23,7 +25,7 @@ class Billing < ApplicationRecord
     example_entry = first_entry
     current_entry_date = example_entry.date
 
-    while (cycles == 1 && current_entry_date < Date.today) || (cycles > 1 && entries.count < cycles)
+    while (cycles == 1 && current_entry_date < Date.today) || (cycles > 1 && entries_count < cycles)
       # ignore the month of the first entry
       current_entry_date = current_entry_date.next_month
       starting, ending = current_entry_date.all_month.minmax
