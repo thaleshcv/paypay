@@ -1,6 +1,0 @@
-#! bin/bash
-
-RAILS_ENV=production bundle exec puma --daemon \
---bind unix://tmp/sockets/puma.sock \
---state tmp/sockets/puma.state \
---control unix://tmp/sockets/pumactl.sock
