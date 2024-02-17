@@ -1,0 +1,6 @@
+#! /bin/bash
+
+git pull
+RAILS_ENV=production bundle exec rails db:migrate
+RAILS_ENV=production bundle exec rails assets:precompile
+sudo passenger-config restart-app .
