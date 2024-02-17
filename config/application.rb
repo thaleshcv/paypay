@@ -40,5 +40,10 @@ module Paypay
     config.generators.system_tests = nil
     config.i18n.default_locale = "pt-BR"
     config.time_zone = "Brasilia"
+
+    config.to_prepare do
+      Devise::SessionsController.layout "auth"
+      Devise::PasswordsController.layout "auth"
+    end
   end
 end
