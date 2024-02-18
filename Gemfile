@@ -33,3 +33,5 @@ group :development do
 end
 
 gem "rack-attack", "~> 6.7"
+
+gem "sitemap_generator", "~> 6.3"

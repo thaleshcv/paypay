@@ -5,4 +5,5 @@ bundle install
 RAILS_ENV=production bundle exec rails db:migrate
 RAILS_ENV=production bundle exec rails assets:precompile
 RAILS_ENV=production bundle exec whenever --update-crontab --user $USER
+RAILS_ENV=production bundle exec rails sitemap:refresh
 sudo passenger-config restart-app .

@@ -37,6 +37,8 @@ pt-BR:
     alert: Alerta
   exclusion:
     confirm: Confirma a exclusão? Esta operação não poderá ser desfeita.
+  logout:
+    confirm: Deseja encerrar a sessão?
   entries:
     create:
       success: Lançamento criado com sucesso.

@@ -1,11 +1,25 @@
-<!DOCTYPE html>
+<!DOCTYPE html lang="pt">
 <html>
   <head>
-    <title>xpensis - expense tracker</title>
+    <title>xpensis - Controle de Despesas</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    <meta name="description" content="xpensis é uma plataforma online para acompanhamento de despesas pessoais completo, intuitivo e fácil de usar."/>
+    <meta name="author" content="xpensis.xyz"/>
+    <meta name="keywords" content="Expense tracker, Controle de Despesas, Gerenciamento de Despesas, Finanças Pessoais"/>
+    <meta property="og:site_name" content="xpensis - Controle de Despesas"/>
+    <meta property="og:title" content="xpensis - Plataforma online para acompanhamento de despesas pessoais completo, intuitivo e fácil de usar."/>
+    <meta property="og:description" content="xpensis é uma plataforma online para acompanhamento de despesas pessoais completo, intuitivo e fácil de usar."/>
+    <meta property="og:image" content="<%= asset_url('logo-no-background.png') %>"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="https://xpensis.xyz"/>
+    <link rel="canonical" href="https://xpensis.xyz"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Audiowide&display=swap" rel="stylesheet">
+    <%= favicon_link_tag "xpensis-favicon-color.png", type: 'image/png' %>
+    <%= favicon_link_tag "xpensis-favicon-color.png", type: 'image/png', rel: "apple-touch-icon" %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
     <%= yield(:head) %>
