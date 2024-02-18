@@ -35,3 +35,5 @@ end
 gem "rack-attack", "~> 6.7"
 
 gem "sitemap_generator", "~> 6.3"
+
+gem "litestack", "~> 0.4.3"
