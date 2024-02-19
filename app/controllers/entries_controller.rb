@@ -19,17 +19,19 @@ class EntriesController < ApplicationController
   def show; end
 
   def new
-    remember_origin("entry-new")
-    @entry = Entry.new
+    remember_origin(ORIGIN_SESSION_KEY)
+    @entry = Entry.new(date: Date.today)
   end
 
   def create
     @entry = current_user.entries.create(create_entry_params)
 
     if @entry.valid?
-      redirect_to_saved_origin("entry-new",
-        fallback: @entry,
-        notice: t(".success"))
+      if params.key?(:commit_and_continue)
+        redirect_to new_entry_path, notice: t(".success")
+      else
+        redirect_to @entry, notice: t(".success")
+      end
     else
       set_categories
       render :new, status: :unprocessable_entity, alert: t(".fail")
@@ -40,14 +42,12 @@ class EntriesController < ApplicationController
   end
 
   def edit
-    remember_origin("entry-#{@entry.id}-edit")
+    remember_origin(ORIGIN_SESSION_KEY)
   end
 
   def update
     if @entry.update(update_entry_params)
-      redirect_to_saved_origin("entry-#{@entry.id}-edit",
-        fallback: @entry,
-        notice: t(".success"))
+      redirect_to @entry, notice: t(".success")
     else
       set_categories
       render :edit, status: :unprocessable_entity, alert: t(".fail")
@@ -55,10 +55,8 @@ class EntriesController < ApplicationController
   end
 
   def destroy
-    source_path = (URI(request.referer).path unless request.referer&.end_with?(entry_path(@entry)))
-
     @entry.destroy
-    redirect_to source_path || root_path, notice: t(".success")
+    redirect_to entries_path, notice: t(".success")
   end
 
   def pending
@@ -72,9 +70,7 @@ class EntriesController < ApplicationController
   private
 
   def cancel_entry_path
-    return entries_path if @entry.nil?
-
-    @entry.new_record? ? read_origin("entry-new") : read_origin("entry-#{@entry.id}-edit")
+    entries_path
   end
 
   def statement_form_params
