@@ -11,6 +11,7 @@ class DashboardController < ApplicationController
 
     @pending_entries = policy_scope(Entry)
       .status_pending
+      .where_date_before_today
       .order(date: :asc)
       .limit(5)
 
