@@ -19,7 +19,6 @@ class EntriesController < ApplicationController
   def show; end
 
   def new
-    remember_origin(ORIGIN_SESSION_KEY)
     @entry = Entry.new(date: Date.today)
   end
 
@@ -41,9 +40,7 @@ class EntriesController < ApplicationController
     render :new, status: :unprocessable_entity, alert: e.message
   end
 
-  def edit
-    remember_origin(ORIGIN_SESSION_KEY)
-  end
+  def edit; end
 
   def update
     if @entry.update(update_entry_params)

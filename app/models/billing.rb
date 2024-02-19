@@ -11,6 +11,8 @@ class Billing < ApplicationRecord
   validates_numericality_of :cycles, only_integer: true, in: (1..12)
   validates_numericality_of :due_date, only_integer: true, in: (1..25)
 
+  after_commit :create_missing_entries, on: :create
+
   def first_entry
     entries.order(date: :asc).first
   end
@@ -22,7 +24,7 @@ class Billing < ApplicationRecord
   def create_missing_entries
     raise NoEntryFoundError, "No entry found for this billing" if entries.count.zero?
 
-    example_entry = first_entry
+    example_entry = last_entry
     current_entry_date = example_entry.date
 
     while (cycles == 1 && current_entry_date < Date.today) || (cycles > 1 && entries_count < cycles)
