@@ -24,13 +24,14 @@
 <div class="p-4 bg-dark rounded">
   <%= simple_form_for @entry, url: entry_status_path(@entry), data: {controller: "mask"} do |f| %>
     <div class="row">
-      <div class="col-md-6">
-        <%= f.input :date, as: :string, input_html: { type: 'date' } %>
+      <div class="col-md-4 mb-3">
+        <%= date_select_calendar(f, method: :date) %>
       </div>
-      <div class="col-md-6">
-        <%= f.input :value, as: :string, input_html: {data: { mask_target: "currency" }} %>
-      </div>
-      <div class="col-md-12">
+      <div class="col-md-8">
+        <%= f.input :value, as: :string, input_html: {
+          class: "fs-1",
+          value: number_with_precision(f.object.value, precision: 2),
+          data: { mask_target: "currency" }} %>
         <%= f.input :comment, input_html: { rows: 5 } %>
       </div>
       <div class="col-md-12">

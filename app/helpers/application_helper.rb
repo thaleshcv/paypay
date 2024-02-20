@@ -1,6 +1,20 @@
 # frozen_string_literal: true
 
+# Main helper.
 module ApplicationHelper
+  def date_select_calendar(builder, method:)
+    calendar_label = builder.label(method, class: "form-label")
+    calendar_container = content_tag :div, nil, data: { "calendar-target" => "container" }
+    calendar_input = builder.input method,
+      label: false,
+      as: :hidden,
+      input_html: { data: { "calendar-target" => "input" } }
+
+    content_tag :div, data: { controller: "calendar" } do
+      [calendar_label, calendar_container, calendar_input].join.html_safe
+    end
+  end
+
   def notification(msg = nil, type: nil, &block)
     class_names = ["notification"]
     class_names << "notification-#{type}" if type.present?

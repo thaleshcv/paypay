@@ -2,14 +2,16 @@
   <div class="row">
     <div class="col-md-7">
       <div class="row">
-        <div class="col-md-5 mb-3" data-controller="calendar">
-          <%= f.label :date, class: "form-label" %>
-          <div id="calendar-container" data-calendar-target="container"></div>
-          <%= f.input :date, label: false, as: :hidden, input_html: {data: {"calendar-target" => "input"}} %>
+        <div class="col-md-5 mb-3">
+          <%= date_select_calendar(f, method: :date) %>
         </div>
         <div class="col-md-7">
           <%= f.input :description %>
-          <%= f.input :value, as: :string, input_html: {class: "fs-1", data: { mask_target: "currency" }} %>
+          <%= f.input :value, as: :string,
+            input_html: {
+              value: number_with_precision(f.object.value, precision: 2),
+              class: "fs-1",
+              data: { mask_target: "currency" }} %>
           <%= label_tag nil, "Situação", class: "form-label" %>
           <div class="d-flex align-items mb-3">
             <%= f.label :status, "Pendente", class: "form-check-label me-2" %>
