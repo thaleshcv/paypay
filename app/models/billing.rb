@@ -18,7 +18,7 @@ class Billing < ApplicationRecord
   end
 
   def last_entry
-    entries.order(date: :desc).first
+    entries.where_date_before_today.order(date: :desc).first
   end
 
   def create_missing_entries

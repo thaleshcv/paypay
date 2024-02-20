@@ -54,6 +54,14 @@ class Entry < ApplicationRecord
     update(fields)
   end
 
+  # Returns others entries from the same biling.
+  # If this entry does not belongs to a billing.
+  def siblings
+    return [] if billing_id.blank?
+
+    self.class.where(billing_id: billing_id).where.not(id: id).order(date: :asc)
+  end
+
   private
 
   def cannot_use_discarded_category

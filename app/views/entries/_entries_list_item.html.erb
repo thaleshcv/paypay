@@ -9,6 +9,9 @@
   </div>
   <div class="col">
     <p class="fs-6">
+      <% if item.billing_id.present? %>
+        <i class="bi bi-calendar-event" title="Lançamento com recorrência"></i>
+      <% end %>
       <%= item.description %>
     </p>
     <small>
