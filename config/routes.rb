@@ -20,6 +20,7 @@ Rails.application.routes.draw do
     end
 
     resources :categories, except: :show
+    resources :billings, only: %i[show]
 
     resources :entries do
       get "pending", on: :collection

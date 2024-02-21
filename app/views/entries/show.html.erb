@@ -1,4 +1,7 @@
-<h1>Lançamento</h1>
+<h2>
+  Lançamento |
+  <small class="text-body-secondary"><%= @entry.description %></small>
+</h2>
 
 <div class="my-3">
   <div class="d-flex">
@@ -15,11 +18,9 @@
   </div>
 </div>
 
-<div class="p-4 bg-dark rounded">
+<div class="p-4 bg-light rounded">
   <div class="row my-3">
     <div class="col-sm-12 col-md-6">
-      <h2 class="mb-4"><%= @entry.description %></h2>
-
       <strong>Valor</strong>
       <p class="lead">
         <%= number_to_currency(@entry.value) %>
@@ -52,56 +53,14 @@
     </div>
     <div class="col-md-6">
       <% @entry.billing.try do |billing| %>
-        <h2 class="mb-4">Recorrência</h2>
-
-        <p>
-          <%= link_to 'Ver recorrência', "path" %>
-        </p>
-
-        <strong>Descrição</strong>
-        <p class="lead">
+        <h3>
+          Recorrência |
           <%= billing.description %>
+        </h3>
+        <%= render billing %>
+        <p>
+          <%= link_to 'Ver recorrência', billing %>
         </p>
-
-        <strong>Dia de vencimento</strong>
-        <p class="lead">
-          <%= billing.due_date %>
-        </p>
-
-        <strong>Ciclos</strong>
-        <p class="lead">
-          <% if billing.cycles == 1 %>
-            <%= t("undefined") %>
-          <% else %>
-            <%= billing.cycles %>
-            &nbsp;
-            (Restam <%= billing.cycles - billing.entries_count %>)
-          <% end %>
-        </p>
-
-        <% billing.first_entry.try do |first_entry| %>
-          <strong>Primeiro lançamento</strong>
-          <p class="lead">
-            <%= l(first_entry.date, format: :long) %>
-            &bull;
-            <%= number_to_currency(first_entry.value) %>
-            &bull;
-            <%= t(first_entry.status, scope: "status") %>
-          </p>
-        <% end %>
-
-        <% if billing.entries_count > 1 %>
-          <% billing.last_entry.try do |last_entry| %>
-            <strong>Último lançamento</strong>
-            <p class="lead">
-              <%= l(last_entry.date, format: :long) %>
-              &bull;
-              <%= number_to_currency(last_entry.value) %>
-              &bull;
-              <%= t(last_entry.status, scope: "status") %>
-            </p>
-          <% end %>
-        <% end %>
       <% end %>
     </div>
   </div>

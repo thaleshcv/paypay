@@ -1,0 +1,16 @@
+<h2>
+  Recorrência |
+  <small class="text-body-secondary"><%= @billing.description %></small>
+</h2>
+
+<div class="p-4 bg-light rounded">
+  <div class="row">
+    <div class="col-md-5">
+      <%= render @billing %>
+    </div>
+    <div class="col-md-7">
+      <h3>Lançamentos</h3>
+      <%= render 'entries/entries_list', entries: @billing.entries %>
+    </div>
+  </div>
+</div>

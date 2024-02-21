@@ -1,6 +1,6 @@
 <div class="row align-items-center ">
   <div class="col-auto px-5 text-center">
-    <p class="fs-4">
+    <p class="fs-4 text-primary">
       <%= item.date.day %>
     </p>
     <span class="text-uppercase">
@@ -10,9 +10,12 @@
   <div class="col">
     <p class="fs-6">
       <% if item.billing_id.present? %>
-        <i class="bi bi-calendar-event" title="Lançamento com recorrência"></i>
+        <i class="bi bi-calendar-event text-primary"
+          title="Lançamento com recorrência"></i>
       <% end %>
-      <%= item.description %>
+      <div class="text-primary">
+        <%= item.description %>
+      </div>
     </p>
     <small>
       Situação:

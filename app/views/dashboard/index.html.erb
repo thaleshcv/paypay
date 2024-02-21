@@ -15,13 +15,15 @@
   </div>
 </div>
 
-<div class="row row-cols-2">
-  <div class="col">
-    <h3>Lançamentos atrasados</h3>
-    <%= render 'entries/entries_list', entries: @pending_entries %>
-  </div>
-  <div class="col">
-    <h3>Próximos lançamentos</h3>
-    <%= render 'entries/entries_list', entries: @next_entries %>
+<div class="p-4 bg-light rounded">
+  <div class="row row-cols-2">
+    <div class="col">
+      <h3>Lançamentos atrasados</h3>
+      <%= render 'entries/entries_list', entries: @pending_entries %>
+    </div>
+    <div class="col">
+      <h3>Próximos lançamentos</h3>
+      <%= render 'entries/entries_list', entries: @next_entries %>
+    </div>
   </div>
 </div>

@@ -1,7 +1,7 @@
 <h1>Lançamentos</h1>
 <%= link_to 'Novo lançamento', new_entry_path %>
 
-<div class="my-5">
+<div class="p-4 bg-light rounded">
   <% unless @pendings_count.zero? %>
     <%= notification type: "danger" do %>
       <div class="row">
@@ -19,18 +19,18 @@
       </div>
     <% end %>
   <% end %>
-</div>
 
-<div class="my-3 p-3 rounded bg-dark overflow-x-auto">
-  <div class="hstack gap-3">
-    <%= collection_link_to_month_entries(@form.date) %>
+  <div class="my-3 p-3 rounded overflow-x-auto">
+    <div class="hstack gap-3">
+      <%= collection_link_to_month_entries(@form.date) %>
+    </div>
   </div>
-</div>
 
-<div class="py-3 my-5">
-  <%= render 'totals_summary', totals: @totals, date: @form.date %>
-</div>
+  <div class="py-3 my-5">
+    <%= render 'totals_summary', totals: @totals, date: @form.date %>
+  </div>
 
-<div class="py-3">
-  <%= render 'entries/entries_list', entries: @entries %>
+  <div class="py-3">
+    <%= render 'entries/entries_list', entries: @entries %>
+  </div>
 </div>

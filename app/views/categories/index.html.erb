@@ -4,10 +4,12 @@
   <%= link_to 'Nova categoria', new_category_path %>
 </div>
 
-<div class="vstack gap-3">
-  <% @categories.each do |item| %>
-    <div class="p-2 bg-dark">
-      <%= render 'categories/categories_list_item', item: item %>
-    </div>
-  <% end %>
+<div class="p-4 bg-light rounded">
+  <div class="vstack gap-3">
+    <% @categories.each do |item| %>
+      <div class="p-2 bg-dark">
+        <%= render 'categories/categories_list_item', item: item %>
+      </div>
+    <% end %>
+  </div>
 </div>
