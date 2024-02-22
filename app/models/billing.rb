@@ -25,12 +25,15 @@ class Billing < ApplicationRecord
     raise NoEntryFoundError, "No entry found for this billing" if entries.count.zero?
 
     example_entry = last_entry
-    current_entry_date = example_entry.date
+    entry_date = Date.new(example_entry.date.year, example_entry.date.month, due_date)
+    date_limit = Date.today + 15.days
 
-    while (cycles == 1 && current_entry_date < Date.today) || (cycles > 1 && entries_count < cycles)
-      # ignore the month of the first entry
-      current_entry_date = current_entry_date.next_month
-      starting, ending = current_entry_date.all_month.minmax
+    while cycles == 1 || (cycles > 1 && entries_count < cycles)
+      entry_date = entry_date.next_month
+
+      break if entry_date > date_limit
+
+      starting, ending = entry_date.all_month.minmax
 
       next unless entries.where_date_between(starting.beginning_of_day, ending.end_of_day).count.zero?
 
@@ -40,7 +43,7 @@ class Billing < ApplicationRecord
         description: "#{Billing.model_name.human} - #{example_entry.description}",
         value: example_entry.value,
         status: "pending",
-        date: Date.new(current_entry_date.year, current_entry_date.month, due_date)
+        date: entry_date
       )
     end
   end
