@@ -14,6 +14,14 @@ class BillingPolicy < ApplicationPolicy
     edit?
   end
 
+  def suspend?
+    edit?
+  end
+
+  def activate?
+    edit?
+  end
+
   def destroy?
     record.user_id = user.id
   end

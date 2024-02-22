@@ -1,0 +1,29 @@
+<%= simple_form_for @billing do |f| %>
+  <div class="notification notification-warning">
+    <i class="bi bi-exclamation-triangle"></i>
+    &nbsp;
+    Alterar o dia de vencimento não impacta nos lançamentos já existentes.
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <%= f.input :description %>
+    </div>
+    <div class="col-6">
+      <%= f.input :due_date,
+        collection: (1..25),
+        prompt: "Selecione o dia do lançamento" %>
+    </div>
+    <div class="col-6">
+      <%= f.input :cycles,
+        collection: entry_billing_cycles_options,
+        label_method: :first,
+        value_method: :last,
+        prompt: "Selecione quantidade de ciclos" %>
+    </div>
+    <div class="col-12">
+      <%= f.submit class: "btn btn-primary" %>
+      <%= link_to 'Cancelar', @billing, class: "btn btn-secondary" %>
+    </div>
+  </div>
+<% end %>

@@ -4,6 +4,8 @@ pt-BR:
   status:
     pending: Pendente
     paid: Pago
+    active: Ativo(a)
+    suspended: Suspenso(a)
   activerecord:
     models:
       entry: Lançamento
@@ -32,11 +34,16 @@ pt-BR:
         description: Descrição
         due_date: Dia de vencimento
         cycles: Ciclos
+        status: Situação
   flash:
     notice: Aviso
     alert: Alerta
   exclusion:
     confirm: Confirma a exclusão? Esta operação não poderá ser desfeita.
+  suspend:
+    confirm: Confirma a suspensão?
+  activate:
+    confirm: Confirma a ativação?
   logout:
     confirm: Deseja encerrar a sessão?
   entries:
@@ -67,3 +74,8 @@ pt-BR:
     registrations:
       update:
         success: Cadastro atualizado com sucesso.
+  billings:
+    activate:
+      success: Recorrência ativada com sucesso.
+    suspend:
+      success: Recorrência suspensa com sucesso.

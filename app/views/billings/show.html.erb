@@ -3,12 +3,38 @@
   <small class="text-body-secondary"><%= @billing.description %></small>
 </h2>
 
+<div class="my-3">
+  <div class="d-flex">
+    <%= link_to '&laquo; Voltar para lançamentos'.html_safe, entries_path %>
+    <span class="ms-auto">
+      <%= link_to 'Editar recorrência', edit_billing_path(@billing) %>
+      &bull;
+      <% if @billing.status_active? %>
+        <%= link_to 'Suspender recorrência',
+        suspend_billing_path(@billing),
+        class: "text-danger",
+        data: {
+          turbo_method: :patch,
+          turbo_confirm: t("suspend.confirm") } %>
+      <% end %>
+      <% if @billing.status_suspended? %>
+        <%= link_to 'Ativar recorrência',
+        activate_billing_path(@billing),
+        class: "text-primary",
+        data: {
+          turbo_method: :patch,
+          turbo_confirm: t("activate.confirm") } %>
+      <% end %>
+    </span>
+  </div>
+</div>
+
 <div class="p-4 bg-light rounded">
-  <div class="row">
-    <div class="col-md-5">
+  <div class="row gap-3">
+    <div class="col-12">
       <%= render @billing %>
     </div>
-    <div class="col-md-7">
+    <div class="col-12">
       <h3>Lançamentos</h3>
       <%= render 'entries/entries_list', entries: @billing.entries %>
     </div>

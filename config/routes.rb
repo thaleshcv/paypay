@@ -20,7 +20,10 @@ Rails.application.routes.draw do
     end
 
     resources :categories, except: :show
-    resources :billings, only: %i[show]
+    resources :billings, only: %i[show edit update] do
+      patch :activate, on: :member
+      patch :suspend, on: :member
+    end
 
     resources :entries do
       get "pending", on: :collection
