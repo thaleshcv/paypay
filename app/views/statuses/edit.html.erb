@@ -1,8 +1,8 @@
-<h1>
+<%= content_for :page_title do %>
   <%= @entry.status_pending? ? "Confirmar pagamento" : "Retornar para pendente" %>
-</h1>
+<% end %>
 
-<div class="row my-3">
+<div class="row">
   <div class="col-md-6">
     <span class="fw-bold">
       Descrição
@@ -21,23 +21,21 @@
   </div>
 </div>
 
-<div class="p-4 bg-light rounded">
-  <%= simple_form_for @entry, url: entry_status_path(@entry), data: {controller: "mask"} do |f| %>
-    <div class="row">
-      <div class="col-md-4 mb-3">
-        <%= date_select_calendar(f, method: :date) %>
-      </div>
-      <div class="col-md-8">
-        <%= f.input :value, as: :string, input_html: {
+<%= simple_form_for @entry, url: entry_status_path(@entry), data: {controller: "mask"} do |f| %>
+  <div class="row">
+    <div class="col-md-4 mb-3">
+      <%= date_select_calendar(f, method: :date) %>
+    </div>
+    <div class="col-md-8">
+      <%= f.input :value, as: :string, input_html: {
           class: "fs-1",
           value: number_with_precision(f.object.value, precision: 2),
           data: { mask_target: "currency" }} %>
-        <%= f.input :comment, input_html: { rows: 5 } %>
-      </div>
-      <div class="col-md-12">
-        <%= f.submit class: "btn btn-primary" %>
-        <%= link_to 'Cancelar', pending_entries_path, class: "btn btn-secondary" %>
-      </div>
+      <%= f.input :comment, input_html: { rows: 5 } %>
     </div>
-  <% end %>
-</div>
+    <div class="col-md-12">
+      <%= f.submit class: "btn btn-primary" %>
+      <%= link_to 'Cancelar', pending_entries_path, class: "btn btn-secondary" %>
+    </div>
+  </div>
+<% end %>

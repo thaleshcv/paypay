@@ -1,21 +1,23 @@
-<h2>Reiniciar minha senha</h2>
-<%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
-  <%= f.error_notification %>
-  <%= f.input :reset_password_token, as: :hidden %>
-  <%= f.full_error :reset_password_token %>
-  <div class="form-inputs">
-    <%= f.input :password,
+<div class="bg-light p-5 rounded">
+  <h2>Reiniciar minha senha</h2>
+  <%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
+    <%= f.error_notification %>
+    <%= f.input :reset_password_token, as: :hidden %>
+    <%= f.full_error :reset_password_token %>
+    <div class="form-inputs">
+      <%= f.input :password,
                 label: "Nova senha",
                 required: true,
                 autofocus: true,
                 hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
                 input_html: { autocomplete: "new-password" } %>
-    <%= f.input :password_confirmation,
+      <%= f.input :password_confirmation,
                 label: "Confirme sua nova senha",
                 required: true,
                 input_html: { autocomplete: "new-password" } %>
-  </div>
-  <div class="d-grid">
-    <%= f.button :submit, "Change my password", class: "btn btn-primary" %>
-  </div>
-<% end %>
+    </div>
+    <div class="d-grid">
+      <%= f.button :submit, "Change my password", class: "btn btn-primary" %>
+    </div>
+  <% end %>
+</div>

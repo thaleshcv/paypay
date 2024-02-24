@@ -1,13 +1,15 @@
-<h2>Esqueceu sua senha?</h2>
-<%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-  <%= f.error_notification %>
-  <div class="form-inputs">
-    <%= f.input :email,
+<div class="bg-light p-5 rounded">
+  <h2>Esqueceu sua senha?</h2>
+  <%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+    <%= f.error_notification %>
+    <div class="form-inputs">
+      <%= f.input :email,
           required: true,
           autofocus: true,
           input_html: { autocomplete: "email" } %>
-  </div>
-  <div class="d-grid">
-    <%= f.button :submit, "Reiniciar minha senha", class: "btn btn-primary" %>
-  </div>
-<% end %>
+    </div>
+    <div class="d-grid">
+      <%= f.button :submit, "Reiniciar minha senha", class: "btn btn-primary" %>
+    </div>
+  <% end %>
+</div>
