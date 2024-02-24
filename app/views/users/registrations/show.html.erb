@@ -1,9 +1,6 @@
-<header class="mb-5">
-  <h1>Meu cadastro</h1>
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
-  <% end %>
-</header>
+<%= content_for :page_title do %>
+  Meu cadastro
+<% end %>
 
 <%= turbo_frame_tag "user-account" do %>
   <%= render partial: "account" %>

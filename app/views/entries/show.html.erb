@@ -1,9 +1,8 @@
-<h2>
-  Lançamento |
-  <small class="text-body-secondary"><%= @entry.description %></small>
-</h2>
+<%= content_for :page_title do %>
+  Lançamento
+<% end %>
 
-<div class="my-3">
+<%= content_for :page_actions do %>
   <div class="d-flex">
     <%= link_to '&laquo; Voltar para lançamentos'.html_safe, entries_path %>
     <span class="ms-auto">
@@ -16,52 +15,44 @@
           turbo_confirm: t("exclusion.confirm") } %>
     </span>
   </div>
-</div>
+<% end %>
 
-<div class="p-4 bg-light rounded">
-  <div class="row my-3">
-    <div class="col-sm-12 col-md-6">
-      <strong>Valor</strong>
-      <p class="lead">
-        <%= number_to_currency(@entry.value) %>
-      </p>
+<h2>
+  <%= @entry.category&.name || "Não categorizado" %> |
+  <small class="text-body-secondary"><%= @entry.description %></small>
+</h2>
 
-      <strong>Categoria</strong>
-      <p class="lead">
-        <%= @entry.category&.name || "Não categorizado" %>
-      </p>
+<div class="row my-3">
+  <div class="col-sm-12 col-md-6">
+    <p class="fs-3">
+      <%= "#{number_to_currency(@entry.value)} em #{l(@entry.date, format: :long)}" %>
+    </p>
 
-      <strong>Data</strong>
-      <p class="lead">
-        <%= l(@entry.date, format: :long) %>
-      </p>
+    <p class="lead">
+      <%= @entry.comment.present? ? @entry.comment : "Nenhum comentário adicionado." %>
+    </p>
 
-      <strong>Incluído em</strong>
-      <p class="lead">
-        <%= l(@entry.created_at, format: :long) %>
-      </p>
+    <strong>Incluído em</strong>
+    <p class="lead">
+      <%= l(@entry.created_at, format: :long) %>
+    </p>
 
-      <strong>Última alteração em</strong>
-      <p class="lead">
-        <%= l(@entry.updated_at, format: :long) %>
-      </p>
+    <strong>Última alteração em</strong>
+    <p class="lead">
+      <%= l(@entry.updated_at, format: :long) %>
+    </p>
 
-      <strong>Comentário</strong>
-      <p class="lead">
-        <%= @entry.comment.present? ? @entry.comment : "Nenhum comentário adicionado." %>
+  </div>
+  <div class="col-md-6">
+    <% @entry.billing.try do |billing| %>
+      <h3>
+        Recorrência |
+        <%= billing.description %>
+      </h3>
+      <%= render billing %>
+      <p>
+        <%= link_to 'Ver recorrência', billing %>
       </p>
-    </div>
-    <div class="col-md-6">
-      <% @entry.billing.try do |billing| %>
-        <h3>
-          Recorrência |
-          <%= billing.description %>
-        </h3>
-        <%= render billing %>
-        <p>
-          <%= link_to 'Ver recorrência', billing %>
-        </p>
-      <% end %>
-    </div>
+    <% end %>
   </div>
 </div>

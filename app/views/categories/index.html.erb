@@ -1,15 +1,15 @@
-<h1>Categorias</h1>
+<%= content_for :page_title do %>
+  Categorias
+<% end %>
 
-<div class="my-3 pt-5">
+<%= content_for :page_actions do %>
   <%= link_to 'Nova categoria', new_category_path %>
-</div>
+<% end %>
 
-<div class="p-4 bg-light rounded">
-  <div class="vstack gap-3">
-    <% @categories.each do |item| %>
-      <div class="p-2 border-bottom border-dark">
-        <%= render 'categories/categories_list_item', item: item %>
-      </div>
-    <% end %>
-  </div>
+<div class="vstack gap-3">
+  <% @categories.each do |item| %>
+    <div class="p-2 border-bottom border-dark">
+      <%= render 'categories/categories_list_item', item: item %>
+    </div>
+  <% end %>
 </div>

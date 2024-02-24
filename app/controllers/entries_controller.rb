@@ -104,6 +104,6 @@ class EntriesController < ApplicationController
   end
 
   def set_categories
-    @categories = Category.available_for_user(current_user)
+    @categories = Category.available_for_user(current_user).order(name: :asc)
   end
 end

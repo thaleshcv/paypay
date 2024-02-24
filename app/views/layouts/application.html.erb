@@ -1,7 +1,7 @@
 <!DOCTYPE html lang="pt">
 <html>
   <head>
-    <title>xpensis - Controle de Despesas</title>
+    <title>xpensis - <%= content_for?(:page_title) ? yield(:page_title) : "Controle de Despesas" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -23,7 +23,7 @@
   </head>
 
   <body id="<%= "#{controller_name}-#{action_name}" %>">
-    <main class="pb-5" style="min-height:95vh;">
+    <main class="pb-5" style="min-height:100vh;margin-top:120px;">
       <%= content_for?(:content) ? yield(:content) : yield %>
     </main>
     <footer class="py-5 bg-dark">

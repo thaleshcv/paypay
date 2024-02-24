@@ -1,49 +1,45 @@
-<h3>Editar perfil</h3>
-
-<div class="p-4 bg-dark rounded">
-  <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-    <%= hidden_field_tag :what, "basic" %>
-    <div class="row">
-      <div class="col-md-3" data-controller="image-preview">
-        <div class="d-flex flex-column">
-          <div>
-            <%= image_tag current_user.safe_avatar_url,
+<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+  <%= hidden_field_tag :what, "basic" %>
+  <div class="row">
+    <div class="col-md-3" data-controller="image-preview">
+      <div class="d-flex flex-column">
+        <div>
+          <%= image_tag current_user.safe_avatar_url,
             class: "img-thumbnail rounded-circle",
             width: "256",
             height: "auto",
             data: { "image-preview-target" => "image" } %>
-          </div>
-          <div class="mt-2">
-            <%= f.label :avatar, class: "btn btn-outline-secondary" do %>
-              Selecionar imagem
-              <i class="bi bi-cloud-arrow-up-fill"></i>
-              <%= f.file_field :avatar,
+        </div>
+        <div class="mt-2">
+          <%= f.label :avatar, class: "btn btn-outline-secondary" do %>
+            Selecionar imagem
+            <i class="bi bi-cloud-arrow-up-fill"></i>
+            <%= f.file_field :avatar,
                 accept: "image/*",
                 class: "d-none",
                 data: {"image-preview-target" => "input"},
                 hidden: true %>
-            <% end %>
-            <a class="btn btn-outline-secondary" data-action="click->image-preview#restore">
-              <i class="bi bi-arrow-counterclockwise"></i>
-            </a>
-          </div>
+          <% end %>
+          <a class="btn btn-outline-secondary" data-action="click->image-preview#restore">
+            <i class="bi bi-arrow-counterclockwise"></i>
+          </a>
         </div>
       </div>
+    </div>
 
-      <div class="col-md-9">
-        <%= f.input :name, autofocus: true %>
-        <%= f.input :email, required: true %>
+    <div class="col-md-9">
+      <%= f.input :name, autofocus: true %>
+      <%= f.input :email, required: true %>
 
-        <%= f.input :current_password,
+      <%= f.input :current_password,
           required: true,
           hint: "Informe sua senha atual para confirmar as alterações.",
           input_html: { autocomplete: "current-password" } %>
-      </div>
-
-      <div class="col-12 mt-5">
-        <%= f.submit class: "btn btn-primary" %>
-        <%= link_to 'Cancelar', user_account_path, class: "btn btn-secondary" %>
-      </div>
     </div>
-  <% end %>
-</div>
+
+    <div class="col-12 mt-5">
+      <%= f.submit class: "btn btn-primary" %>
+      <%= link_to 'Cancelar', user_account_path, class: "btn btn-secondary" %>
+    </div>
+  </div>
+<% end %>

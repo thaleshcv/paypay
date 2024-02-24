@@ -1,22 +1,25 @@
-<h1>Lançamentos pendentes</h1>
-<%= link_to entries_path do %>
-  &laquo; Voltar para lançamentos
+<%= content_for :page_title do %>
+  Lançamentos pendentes
 <% end %>
 
-<div class="p-4 bg-light rounded">
-  <% if @entries.empty? %>
-    <%= notification type: "primary" do %>
-      <i class="bi bi-exclamation-triangle"></i>&nbsp;
-      <span>Nenhum lançamento pendente encontrado.</span>
-    <% end %>
+<%= content_for :page_actions do %>
+  <%= link_to entries_path do %>
+    &laquo; Voltar para lançamentos
   <% end %>
+<% end %>
 
-  <% unless @entries.empty? %>
-    <% group_entries_by_month(@entries).each do |month, entries| %>
-      <div class="mb-5">
-        <h4><%= month %></h4>
-        <%= render 'entries/entries_list', entries: entries %>
-      </div>
-    <% end %>
+<% if @entries.empty? %>
+  <%= notification type: "primary" do %>
+    <i class="bi bi-exclamation-triangle"></i>&nbsp;
+    <span>Nenhum lançamento pendente encontrado.</span>
   <% end %>
-</div>
+<% end %>
+
+<% unless @entries.empty? %>
+  <% group_entries_by_month(@entries).each do |month, entries| %>
+    <div class="mb-5">
+      <h4><%= month %></h4>
+      <%= render 'entries/entries_list', entries: entries %>
+    </div>
+  <% end %>
+<% end %>

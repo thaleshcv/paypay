@@ -1,36 +1,39 @@
-<h1>Lançamentos</h1>
-<%= link_to 'Novo lançamento', new_entry_path %>
+<%= content_for :page_title do %>
+  Lançamentos
+<% end %>
 
-<div class="p-4 bg-light rounded">
-  <% unless @pendings_count.zero? %>
-    <%= notification type: "danger" do %>
-      <div class="row">
-        <div class="col-md">
-          <i class="bi bi-exclamation-triangle"></i>&nbsp;
-          <span>
-            Você tem <%= pluralize(@pendings_count, 'lançamento atrasado', 'lançamentos atrasados') %>.
-          </span>
-        </div>
-        <div class="col-md-auto">
-          <%= link_to pending_entries_path do %>
-            Ver todos&nbsp;&raquo;
-          <% end %>
-        </div>
+<%= content_for :page_actions do %>
+  <%= link_to 'Novo lançamento', new_entry_path %>
+<% end %>
+
+<% unless @pendings_count.zero? %>
+  <%= notification type: "danger" do %>
+    <div class="row">
+      <div class="col-md">
+        <i class="bi bi-exclamation-triangle"></i>&nbsp;
+        <span>
+          Você tem <%= pluralize(@pendings_count, 'lançamento atrasado', 'lançamentos atrasados') %>.
+        </span>
       </div>
-    <% end %>
-  <% end %>
-
-  <div class="my-3 p-3 rounded overflow-x-auto">
-    <div class="hstack gap-3">
-      <%= collection_link_to_month_entries(@form.date) %>
+      <div class="col-md-auto">
+        <%= link_to pending_entries_path do %>
+          Ver todos&nbsp;&raquo;
+        <% end %>
+      </div>
     </div>
-  </div>
+  <% end %>
+<% end %>
 
-  <div class="py-3 my-5">
-    <%= render 'totals_summary', totals: @totals, date: @form.date %>
+<div class="py-3 rounded overflow-x-auto">
+  <div class="hstack gap-3">
+    <%= collection_link_to_month_entries(@form.date) %>
   </div>
+</div>
 
-  <div class="py-3">
-    <%= render 'entries/entries_list', entries: @entries %>
-  </div>
+<div class="py-3">
+  <%= render 'totals_summary', totals: @totals, date: @form.date %>
+</div>
+
+<div class="py-3">
+  <%= render 'entries/entries_list', entries: @entries %>
 </div>

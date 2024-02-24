@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md mb-4 bg-dark" data-bs-theme="dark">
+<nav class="navbar fixed-top navbar-expand-md mb-4 bg-dark" data-bs-theme="dark">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">
       <%= image_tag 'logo-no-background', width: "160", height: "auto" %>
@@ -24,7 +24,7 @@
           <%= link_to 'Categorias', categories_path, class: "nav-link" %>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle btn btn-small btn-primary"
+          <a class="nav-link dropdown-toggle btn btn-small btn-light"
             href="#"
             role="button"
             data-bs-toggle="dropdown"
@@ -39,7 +39,7 @@
             <li>
               <%= link_to 'Logout',
                 destroy_user_session_path,
-                class: "dropdown-item text-primary",
+                class: "dropdown-item text-danger",
                 data: {
                   turbo_confirm: t("logout.confirm"),
                   turbo_method: "delete" } %>
