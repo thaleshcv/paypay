@@ -9,6 +9,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
     render_not_found
   end
 
+  def create
+    raise NotImplementedError
+  end
+
   def show; end
 
   def update
