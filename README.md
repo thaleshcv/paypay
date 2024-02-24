@@ -7,5 +7,4 @@
 - ~~Administração de recorrência;~~
 - Tratar processamento de recorrência quando não há lançamentos para usar como exemplo;
 - Avaliar inclusão de recorrência na edição de um lançamento;
-- Adicionar campo "installment" (parcela) aos lançamentos;
 - Adicionar teste para geração automática de lançamentos pela recorrência;
