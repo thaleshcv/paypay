@@ -1,11 +1,7 @@
 <div class="container-fluid">
   <div class="vh-100 row align-items-center">
     <div class="col-md-7 text-center">
-      <%= picture_tag do %>
-        <%= tag(:source, :srcset => image_path("logo-600.png"), :media => "(min-width: 300px)") %>
-        <%= tag(:source, :srcset => image_path("logo-600.png"), :media => "(min-width: 600px)") %>
-        <%= image_tag("logo-1500.png", :alt => "xpensis logo") %>
-      <% end %>
+      <%= image_tag 'logo-300.png', width: "300" %>
       <h1 class="mt-5 fs-2">Ferramenta online e gratuita para acompanhamento de despesas.</h1>
       <div class="d-grid gap-2 d-md-block mt-5">
         <%= link_to 'Já tenho uma conta',
