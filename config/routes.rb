@@ -7,6 +7,14 @@ Rails.application.routes.draw do
 
   devise_for :users, controllers: { registrations: "users/registrations" }
 
+  unauthenticated do
+    with_options controller: :pages do
+      get "/", action: :landing
+      get "/terms", action: :terms
+      get "/privacy", action: :privacy
+    end
+  end
+
   authenticate :user do
     get "/", to: redirect("/dashboard")
     get "dashboard", to: "dashboard#index"
