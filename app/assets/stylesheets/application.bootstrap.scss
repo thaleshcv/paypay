@@ -1,6 +1,4 @@
-@import "variables";
 @import "bootstrap/scss/bootstrap";
-@import "bootswatch";
 @import "bootstrap-icons/font/bootstrap-icons";
 @import "entries";
 
@@ -18,7 +16,6 @@ body {
   @extend .p-3;
   @extend .mb-3;
   @extend .rounded;
-  @extend .bg-dark;
 
   &.notification-primary {
     color: $primary;
