@@ -3,10 +3,11 @@
 # Helper for Dashboard view.
 module DashboardHelper
   DASHBOARD_ENTRIES_PARTIAL = Hash.new("pending_entries_list").tap do |h|
+    h["pending"] = "pending_entries_list"
     h["next"] = "next_entries_list"
   end.freeze
 
-  def render_dashboard_entries_list(value, entries, &)
+  def render_dashboard_entries_list(value, entries)
     render "dashboard/#{DASHBOARD_ENTRIES_PARTIAL[value]}", entries: entries
   end
 

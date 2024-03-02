@@ -26,11 +26,11 @@
     <main class="pb-5" style="min-height:100vh;">
       <%= content_for?(:content) ? yield(:content) : yield %>
     </main>
-    <footer class="py-5 bg-dark">
+    <footer class="py-5 text-light bg-dark">
       <div class="container">
         <p>
           <%= link_to root_path do %>
-            <%= image_tag 'logo-300.png', width: "160", height: "auto" %>
+            <%= image_tag 'logo-300.png', width: "300", height: "auto" %>
           <% end %>
         </p>
         <p class="float-end"><a href onclick="document.body.scrollTop=0;document.documentElement.scrollTop=0;">Back to top</a></p>

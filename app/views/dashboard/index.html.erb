@@ -19,7 +19,7 @@
 <div class="bg-light rounded">
   <div class="mb-3">
     <%= dashboard_entries_nav do %>
-      <%= dashboard_entries_nav_link "Lançamentos atrasados", "", count: @pending_entries_count %>
+      <%= dashboard_entries_nav_link "Lançamentos atrasados", "pending", count: @pending_entries_count %>
       <%= dashboard_entries_nav_link "Próximos lançamentos", "next", count: @next_entries_count %>
     <% end %>
   </div>
