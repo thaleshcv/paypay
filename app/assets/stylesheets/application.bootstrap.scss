@@ -11,6 +11,14 @@ body {
   scroll-behavior: smooth;
 }
 
+dialog {
+  @extend .border;
+  @extend .border-light;
+  @extend .rounded;
+  @extend .rounded-3;
+  @extend .shadow;
+}
+
 .notification {
   @extend .shadow-sm;
   @extend .p-3;

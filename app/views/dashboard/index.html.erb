@@ -17,13 +17,11 @@
 <% end %>
 
 <div class="bg-light rounded">
-  <%= turbo_frame_tag "dashboard_entries" do %>
-    <div class="mb-3">
-      <%= dashboard_entries_nav do %>
-        <%= dashboard_entries_nav_link "Lançamentos atrasados", "", count: @pending_entries_count %>
-        <%= dashboard_entries_nav_link "Próximos lançamentos", "next", count: @next_entries_count %>
-      <% end %>
-    </div>
-    <%= render_dashboard_entries_list(last_entries_list_value, @entries) %>
-  <% end %>
+  <div class="mb-3">
+    <%= dashboard_entries_nav do %>
+      <%= dashboard_entries_nav_link "Lançamentos atrasados", "", count: @pending_entries_count %>
+      <%= dashboard_entries_nav_link "Próximos lançamentos", "next", count: @next_entries_count %>
+    <% end %>
+  </div>
+  <%= render_dashboard_entries_list(last_entries_list_value, @entries) %>
 </div>

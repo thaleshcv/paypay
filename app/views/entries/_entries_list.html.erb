@@ -1,14 +1,16 @@
-<% if entries.empty? %>
-  <%= notification type: "primary" do %>
-    <i class="bi bi-exclamation-triangle"></i>&nbsp;
-    <span>Nenhum lançamento encontrado.</span>
+<div class="pt-3">
+  <% if entries.empty? %>
+    <%= notification type: "primary" do %>
+      <i class="bi bi-exclamation-triangle"></i>&nbsp;
+      <span>Nenhum lançamento encontrado.</span>
+    <% end %>
   <% end %>
-<% end %>
 
-<div class="vstack gap-1">
-  <% entries.each do |item| %>
-    <div class="p-2">
-      <%= render 'entries/entries_list_item', item: item %>
-    </div>
-  <% end %>
+  <div class="vstack gap-3">
+    <% entries.each do |item| %>
+      <div class="p-2 bg-white rounded rounded-2">
+        <%= render 'entries/entries_list_item', item: item %>
+      </div>
+    <% end %>
+  </div>
 </div>
