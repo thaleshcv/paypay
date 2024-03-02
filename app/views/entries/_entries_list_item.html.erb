@@ -25,33 +25,40 @@
     </small>
     <%= link_to '', item, class: "stretched-link" %>
   </div>
-  <div class="col-auto text-end d-flex align-items-center" data-controller="dialog">
+  <div class="col-auto text-end d-flex align-items-center">
     <span class="fs-2">
       <%= number_to_currency(item.value) %>
     </span>
-    <button class="btn mx-2 rounded-pill" data-action="click->dialog#launchDialog">
-      <i class="bi bi-three-dots-vertical"></i>
-    </button>
-    <dialog data-dialog-target="dialog">
-      <button type="button" class="btn-close" aria-label="Close" data-action="click->dialog#closeDialog"></button>
-      <div class="d-grid gap-2 mt-3" style="min-width:300px;">
-        <%= link_to 'Detalhar', item, class: "btn btn-light" %>
-        <%= link_to 'Editar', edit_entry_path(item), class: "btn btn-light" %>
-        <%= link_to edit_entry_status_path(item), class: "btn btn-light" do %>
-          <% if item.status_pending? %>
-            Confirmar pagamento
-          <% else %>
-            Desfazer pagamento
+    <%= link_to item, class: "btn btn-lg mx-1", title: 'Detalhar' do %>
+      <i class="bi bi-chevron-right"></i>
+    <% end %>
+    <div class="dropdown">
+      <button class="btn btn-lg mx-1 dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <i class="bi bi-gear"></i>
+      </button>
+      <ul class="dropdown-menu dropdown-menu-end">
+        <li>
+          <%= link_to 'Editar', edit_entry_path(item), class: "dropdown-item" %>
+        </li>
+        <li>
+          <%= link_to edit_entry_status_path(item), class: "dropdown-item" do %>
+            <% if item.status_pending? %>
+              Confirmar pagamento
+            <% else %>
+              Desfazer pagamento
+            <% end %>
           <% end %>
-        <% end %>
-        <%= link_to 'Excluir',
+        </li>
+        <li>
+          <%= link_to 'Excluir',
           item,
-          class: "btn btn-danger",
+          class: "dropdown-item text-danger",
           data: {
             turbo_confirm: t("exclusion.confirm"),
             turbo_method: :delete
           } %>
-      </div>
-    </dialog>
+        </li>
+      </ul>
+    </div>
   </div>
 </div>
